@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+  <title>Network</title>
+  <script type="text/javascript" src="node_modules/vis-network/dist/vis-network.min.js"></script>
+  <link href="node_modules/vis-network/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    body { 
+      background: rgba(0,0,0,0.9);
+      font-family: 'proxima-nova', Helvetica;  
+    }
+    
+    #mynetwork {
+      width: 100%;
+      height: 700px;
+      background: rgba(0,0,0,0.9);
+    }
+  </style>
+</head>
+<body style="background:black;">
+<div id="mynetwork"></div>
+<script type="text/javascript">
+  var options = {
+     physics: {
+          stabilization: false
+        },
+    autoResize: true,
+    nodes : {
+      shape: 'dot',
+      font:'16px proxima-nova white',
+    },
+    edges : {
+      color: 'white'
+
+    }
+
+  }
+
+  // create an array with nodes
+  var nodes = new vis.DataSet([
+    {id: 1, size:10,label: 'AnnA',color: 'rgba(97,195,238,0.8)',},
+    {id: 2, size:10,label: 'Poulpe',shape: 'dot',color: 'rgba(97,195,238,0.8)'},
+    {id: 3, size:10,label: 'FurryBond',shape: 'dot',color: 'rgba(97,195,238,0.8)'},
+    {id: 4, size:10,label: 'Pample',shape: 'dot',color: 'rgba(97,195,238,0.8)'},
+    {id: 5, size:10,label: 'Yakari',shape: 'dot',color: 'rgba(97,195,238,0.8)'},
+    {id: 6, size:30,label: '11em',shape: 'dot',color: 'rgba(255,0,0,0.8)'},
+    {id: 7, size:30,label: 'Roman-Sur-Isère',shape: 'dot',color: 'rgba(255,10,10,0.8)'},
+    {id: 8, size:20,label: 'Multitude',shape: 'dot',color: 'rgba(10,255,10,0.8)'},
+    {id: 9, size:20,label: 'Soit-niant',shape: 'dot',color: 'rgba(10,255,10,0.8)'},
+    {id: 10, size:20,label: '31propositions-#1',shape: 'dot',color: 'rgba(10,255,10,0.8)'},
+    {id: 11, size:10,label: "vu de l'extérieur",color: 'rgba(97,195,238,0.8)',},
+    {id: 12, size:10,label: 'Lrt C.',color: 'rgba(97,195,238,0.8)',},
+    {id: 13, size:10,label: 'collectif des pulpes',color: 'rgba(97,195,238,0.8)',},
+    {id: 14, size:10,label: 'Serge',color: 'rgba(97,195,238,0.8)',},
+    {id: 15, size:10,label: 'vanocéane',color: 'rgba(97,195,238,0.8)',},
+    {id: 16, size:10,label: 'adeuxcorps',color: 'rgba(97,195,238,0.8)',},
+    {id: 17, size:10,label: 'Lrt',color: 'rgba(97,195,238,0.8)',},
+    {id: 18, size:10,label: 'Petalidou',color: 'rgba(97,195,238,0.8)',},
+    {id: 19, size:10,label: 'sebastien 82',color: 'rgba(97,195,238,0.8)',},
+    {id: 20, size:10,label: 'douxdingues',color: 'rgba(97,195,238,0.8)',},
+    {id: 21, size:10,label: 'Panda',color: 'rgba(97,195,238,0.8)',},
+    {id: 22, size:10,label: 'tranquill',color: 'rgba(97,195,238,0.8)',},
+    {id: 23, size:10,label: 'Hempi_shibari',color: 'rgba(97,195,238,0.8)',},
+    {id: 24, size:10,label: 'Bliana',color: 'rgba(97,195,238,0.8)',},
+    {id: 25, size:10,label: 'STEPH&ISA',color: 'rgba(97,195,238,0.8)',},
+    {id: 26, size:10,label: 'legato',color: 'rgba(97,195,238,0.8)',},
+    {id: 27, size:10,label: 'simone_jeanpaul',color: 'rgba(97,195,238,0.8)',},
+    {id: 28, size:10,label: 'Simone',color: 'rgba(97,195,238,0.8)',},
+    {id: 29, size:10,label: 'oulalaa69',color: 'rgba(97,195,238,0.8)',},
+    {id: 30, size:10,label: 'Guylaine & Christophe',color: 'rgba(97,195,238,0.8)',},
+    {id: 31, size:10,label: 'denyd26',color: 'rgba(97,195,238,0.8)',},
+    {id: 32, size:10,label: 'joël nadège',color: 'rgba(97,195,238,0.8)',},
+    {id: 33, size:10,label: 'Licencieuse-Lou',color: 'rgba(97,195,238,0.8)',},
+    {id: 34, size:10,label: 'Liebeskind',color: 'rgba(97,195,238,0.8)',},
+    {id: 35, size:10,label: 'Kael-Kinbaku',color: 'rgba(97,195,238,0.8)',},
+
+    
+  ]);
+
+  // create an array with edges
+  var edges = new vis.DataSet([
+    {from: 10, to: 6},
+    {from: 10, to: 7},
+    {from: 9, to: 6},
+    {from: 8, to: 6},
+    {from: 1, to: 8},
+    {from: 1, to: 9},
+    {from: 4, to: 9},
+    {from: 5, to: 9},
+    {from: 2, to: 9},
+    {from: 1, to: 10},
+    {from: 2, to: 10},
+    {from: 3, to: 10},
+    {from: 4, to: 10},
+    {from: 5, to: 10},
+    {from: 31, to: 10},
+    
+
+  ]);
+
+  // create a network
+  var container = document.getElementById('mynetwork');
+  var data = {
+    nodes: nodes,
+    edges: edges
+  };
+
+  var network = new vis.Network(container, data, options);
+</script>
+</body>
+</html>
