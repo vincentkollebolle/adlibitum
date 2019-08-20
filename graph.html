@@ -1,14 +1,23 @@
 <!doctype html>
 <html>
 <head>
-  <title>Network</title>
+  <title>Adlibitum - Graphe</title>
   <meta charset="UTF-8">
   <script type="text/javascript" src="node_modules/vis-network/dist/vis-network.min.js"></script>
+ 
+  <link href="slide.css" rel="stylesheet" type="text/css" />
+  
   <link href="node_modules/vis-network/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
   <style type="text/css">
     //palette https://colorhunt.co/palette/152733
     body { 
       font-family: 'proxima-nova', Helvetica;  
+    }
+    #header {
+      color: white;
+    }
+    #header a {
+      color: white;
     }
     
     #mynetwork {
@@ -16,10 +25,125 @@
       height: 790px;
       background: #444444;
     }
-  </style>
+    
+    // https://github.com/CodyHouse/slide-in-panel
+    .cd-panel {
+  /*...*/
+  visibility: hidden;
+  transition: visibility 0s 0.6s;
+}
+
+.cd-panel.cd-panel--is-visible {
+  visibility: visible;
+  transition: visibility 0s 0s;
+}
+
+.cd-panel__header {
+  /*...*/
+  position: fixed;
+  top: 0;
+  width: 40%;
+  height: 50px;
+  transition: transform 0.3s 0s;
+  transform: translateY(-50px);
+}
+
+.cd-panel--from-right .cd-panel__header {
+  right: 0;
+}
+
+.cd-panel--from-left .cd-panel__header {
+  left: 0;
+}
+
+.cd-panel--is-visible .cd-panel__header {
+  transition: transform 0.3s 0.3s;
+  transform: translateY(0px);
+}
+
+.cd-panel__container {
+  /*...*/
+  position: fixed;
+  width: 40%;
+  height: 100%;
+  top: 0;
+  transition: transform 0.3s 0.3s;
+}
+
+.cd-panel--from-right .cd-panel__container {
+  right: 0;
+  transform: translate3d(100%, 0, 0);
+}
+
+.cd-panel--from-left .cd-panel__container {
+  left: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.cd-panel--is-visible .cd-panel__container {
+  transform: translate3d(0, 0, 0);
+  transition-delay: 0s;
+}
+.cd-panel__header h1 {
+  color:black;
+  margin: 0;
+}
+.cd-panel.cd-panel--is-visible::after {
+  background-color: transparent;
+}
+</style>
+
 </head>
 <body style="background:#444444;">
-<div id="mynetwork"></div>
+
+  <div id="header">
+    
+    <!--
+    <input type="checkbox" checked="checked" /> Ressource 
+    <input type="checkbox" checked="checked" /> Evenement 
+    <input type="checkbox" checked="checked" /> Personne 
+    --
+    <input type="checkbox" checked="checked" /> Participant.e 
+    <input type="checkbox" /> Parainage 
+    <input type="checkbox"  /> Administrateur
+    --> 
+  </div>
+<main class="cd-main-content">
+ <a href="#0" class="cd-btn js-cd-panel-trigger" data-panel="main">Click Jardin Cordial</a>
+  <div id="mynetwork"></div>
+</main>  
+<div class="cd-panel cd-panel--from-right js-cd-panel-main">
+  <header class="cd-panel__header">
+    <h1>Le Jardin Cordial</h1>
+    <a href="#0" class="cd-panel__close js-cd-close">Close</a>
+  </header>
+  <div class="cd-panel__container">
+    <div class="cd-panel__content" style="color:black">
+
+
+      <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
+      <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
+      <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
+      <p>
+        <h2> Présentation courte </h2>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque similique, at excepturi adipisci repellat ut veritatis officia, saepe nemo soluta modi ducimus velit quam minus quis reiciendis culpa ullam quibusdam eveniet. Dolorum alias ducimus, ad, vitae delectus eligendi, possimus magni ipsam repudiandae iusto placeat.
+      </p>
+      <p>
+        <h2>Présentation détaillée</h2>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque similique, at excepturi adipisci repellat ut veritatis officia, saepe nemo soluta modi ducimus velit quam minus quis reiciendis culpa ullam quibusdam eveniet. Dolorum alias ducimus, ad, vitae delectus eligendi, possimus magni ipsam repudiandae iusto placeat repellat omnis veritatis adipisci aliquam hic ullam facere voluptatibus ratione laudantium perferendis quos ut. Beatae expedita, itaque assumenda libero voluptatem adipisci maiores voluptas accusantium, blanditiis saepe culpa laborum iusto maxime quae aperiam fugiat odit consequatur soluta hic. Sed quasi beatae quia repellendus, adipisci facilis ipsa vel, aperiam, consequatur eaque mollitia quaerat. Iusto fugit inventore eveniet velit.
+      </p>
+      
+      <p>
+        <strong>Administrateur :</strong> <a href="">Bliana</a> <br />
+        <strong>Créé le : </strong>jj/mm/YYYY <br />
+        <strong>Last update : </strong> jj/mm/YYYY
+      </ul>
+</div> 
+</div> 
+</div> 
+<div class="demo-avd demo-avd--light js-demo-avd" style="bottom: 30px; left: 30px; background-color: #424f5c; top: auto;"></div>
+
+
 <script type="text/javascript">
   var options = {
     interaction: {
@@ -101,7 +225,7 @@
 
   //parainage -- à inviter machin ou truc
   //administrateur -- à l'origine du node
-  //present -- à l'événement
+  //participe -- à l'événement
   //occurence -- entre ressource & événement
   
   var edges = new vis.DataSet([
@@ -149,7 +273,6 @@
     {from: 48, to: 5},
 
     //Jardin Cordial @ meaux
-    {from: 49, to: 47},
     {from: 49, to: 1},
     {from: 49, to: 2},
     {from: 49, to: 3},
@@ -158,6 +281,16 @@
     {from: 49, to: 21},
     {from: 49, to: 24},
 
+    //bliana(24) ADMINISTRATEUR JardinCordial(47)
+    //{from: 24, to: 47, color:{color:'red'}},
+    //bliana(24) ADMINISTRATEUR JardinCordial@Meaux(49)
+    //{from: 24, to: 49, color:{color:'yellow'}},
+    //bliana(24) PARTICIPE JardinCordial@Meaux(49)
+    {from: 24, to: 49, color:{color:'green'}},
+    //JardinCordial@Meaux(49) OCCURENCE JardinCordial(47)
+    {from: 49, to: 47, color:{color:'#cf455c'}}, 
+    //Claude(2) PARAIN bliana(24)
+    // {from: 2, to: 24, color:{color:'brown'}},
 
 
 
@@ -174,5 +307,8 @@
 
   var network = new vis.Network(container, data, options);
 </script>
+ <script type="text/javascript" src="slide.js"></script>
+
+
 </body>
 </html>
