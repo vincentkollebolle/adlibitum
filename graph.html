@@ -32,6 +32,7 @@
   </style>
 </head>
 <body>
+    <button id="testButton">New Request</button>
     <div id="mynetwork"></div>
     <div id='slider'>
         <h1 class="slider-titre">Titre</h1>
@@ -83,8 +84,6 @@
       node.titre = v.properties.titre;
       node.chapeau = v.properties.chapeau;
       node.contenu = v.properties.contenu;
-      console.log("created node: ");
-      console.log(node);
       return node;
     }
 
@@ -96,70 +95,77 @@
       edge.title = '';
       return edge;
     }
+
     //neo4jDriver.v1.types.Date
     var options = {};
-    var nodes = new vis.DataSet([]);
-    var edges = new vis.DataSet([]);
+    var query = "MATCH (n)-[r]-(m) OPTIONAL MATCH (p) RETURN n,r,m,p";
+    const nodes = new vis.DataSet([]);
+    const edges = new vis.DataSet([]);
 
-    var driver = neo4j.v1.driver("bolt://165.22.206.197", neo4j.v1.auth.basic("neo4j", "neo4j"));
-    var session = driver.session();
-    session
-      .run('MATCH (n)-[r]-(m) OPTIONAL MATCH (p) RETURN n,r,m,p', {limit: 3000})
-      .subscribe({
-        onNext: (record) => {
-        //construction dataPromise
-        const dataPromises = Object.values(record.toObject()).map(
-          async (v) => {
-            //neo4j.v1.types.Node
-            if (v instanceof neo4j.v1.types.Node) {
-              try {
-                node = createNode(v);
-                nodes.add(node);
-              } catch (e) {
-                //console.log(e);
-              }
-
-            } else if (v instanceof neo4j.v1.types.Relationship) {
-              edge = createEdge(v);
-              edges.add(edge);
-            }  else if (v instanceof Neo4j.types.Path) {
-              var startNode = createNode(v.start);
-              var endNode = createNode(v.end);
-
-              nodes.add(startNode);
-              nodes.add(endNode);
-
-              for (let obj of v.segments) {
-                nodes.add(createNode(obj.start));
-                nodes.add(createNode(obj.end));
-                edges.add(createEdge(obj.relationship));
-              }
-
-            } else if (v instanceof Array) {
-              for (let obj of v) {
-                if (obj instanceof Neo4j.types.Node) {
-                  var node = createNode(obj);
+    function populateDataSets(query) {
+      var driver = neo4j.v1.driver("bolt://165.22.206.197", neo4j.v1.auth.basic("neo4j", "neo4j"));
+      var session = driver.session();
+      session
+        .run(query, {limit: 3000})
+        .subscribe({
+          onNext: (record) => {
+          //construction dataPromise
+          const dataPromises = Object.values(record.toObject()).map(
+            async (v) => {
+              //neo4j.v1.types.Node
+              if (v instanceof neo4j.v1.types.Node) {
+                try {
+                  node = createNode(v);
                   nodes.add(node);
+                } catch (e) {
+                  //console.log(e);
+                }
 
-                } else if (obj instanceof Neo4j.types.Relationship) {
-                  var edge = createEdge(obj);
-                  edges.add(edge);
+              } else if (v instanceof neo4j.v1.types.Relationship) {
+                edge = createEdge(v);
+                edges.add(edge);
+              }  else if (v instanceof Neo4j.types.Path) {
+                var startNode = createNode(v.start);
+                var endNode = createNode(v.end);
+
+                nodes.add(startNode);
+                nodes.add(endNode);
+
+                for (let obj of v.segments) {
+                  nodes.add(createNode(obj.start));
+                  nodes.add(createNode(obj.end));
+                  edges.add(createEdge(obj.relationship));
+                }
+
+              } else if (v instanceof Array) {
+                for (let obj of v) {
+                  if (obj instanceof Neo4j.types.Node) {
+                    var node = createNode(obj);
+                    nodes.add(node);
+
+                  } else if (obj instanceof Neo4j.types.Relationship) {
+                    var edge = createEdge(obj);
+                    edges.add(edge);
+                  }
                 }
               }
             }
+          );
+      },
+          onCompleted: function () {
+            //vibration du noeud actu
+            battement();
+            session.close();
+          
+          },
+          onError: function (error) {
+            console.log(error);
           }
-        );
-    },
-        onCompleted: function () {
-          session.close();
-        //console.log(nodes);
-        //console.log(edges);
-        },
-        onError: function (error) {
-          console.log(error);
-        }
-      });
+        });
+      }
 
+    //populate Data Sets with Neo4j
+    populateDataSets(query);
 
     // create a network
     var options = {
@@ -182,26 +188,38 @@
         }
 
       }
-    var container = document.getElementById('mynetwork');
-    var data = {
-      nodes: nodes,
-      edges: edges
-    };
-
-  var network = new vis.Network(container, data, options);
+  var container = document.getElementById('mynetwork');
+  var network = new vis.Network(container, {nodes: nodes,edges: edges}, options);
 
   
-
+  //click sur le graphe
   network.on("selectNode", function (params) {
-        console.log('selectNode Event:', params.nodes[0]);
+        
         var currentNode = nodes.get(params.nodes[0]);
-        console.log(currentNode.name);
         //populate slider
         $(".slider-titre").html(currentNode.titre);
         $(".slider-chapeau").html(currentNode.chapeau);
         $(".slider-contenu").html(currentNode.contenu);
         slider.slideReveal("show");
     });
+
+    var toUp = true;
+    var size2update = 10;
+    //vibration 
+    function battement() {
+      if (toUp == true) {
+        size2update = size2update + 15;
+        nodes.update([{id:124,size:size2update}]);
+        toUp = false;
+      } else {
+        size2update = size2update - 15;
+        nodes.update([{id:124,size:size2update}]);
+        toUp = true;
+      }
+      setTimeout(battement,1500);
+    }
+
+
   </script>
 
 </body>
