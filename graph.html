@@ -1,314 +1,208 @@
 <!doctype html>
 <html>
 <head>
-  <title>Adlibitum - Graphe</title>
-  <meta charset="UTF-8">
-  <script type="text/javascript" src="node_modules/vis-network/dist/vis-network.min.js"></script>
- 
-  <link href="slide.css" rel="stylesheet" type="text/css" />
-  
-  <link href="node_modules/vis-network/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
-  <style type="text/css">
-    //palette https://colorhunt.co/palette/152733
-    body { 
+    <title>Adlibitum - Graphe</title>
+    <meta charset="utf-8">
+    <link href="node_modules/vis-network/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
+    <style>
+    /* palette https://colorhunt.co/palette/152733 */
+    body {
+      background-color: #444444;
       font-family: 'proxima-nova', Helvetica;  
     }
-    #header {
-      color: white;
-    }
-    #header a {
-      color: white;
-    }
-    
     #mynetwork {
       width: 100%;
-      height: 790px;
+      height: 760px;
       background: #444444;
     }
-    
-    // https://github.com/CodyHouse/slide-in-panel
-    .cd-panel {
-  /*...*/
-  visibility: hidden;
-  transition: visibility 0s 0.6s;
-}
-
-.cd-panel.cd-panel--is-visible {
-  visibility: visible;
-  transition: visibility 0s 0s;
-}
-
-.cd-panel__header {
-  /*...*/
-  position: fixed;
-  top: 0;
-  width: 40%;
-  height: 50px;
-  transition: transform 0.3s 0s;
-  transform: translateY(-50px);
-}
-
-.cd-panel--from-right .cd-panel__header {
-  right: 0;
-}
-
-.cd-panel--from-left .cd-panel__header {
-  left: 0;
-}
-
-.cd-panel--is-visible .cd-panel__header {
-  transition: transform 0.3s 0.3s;
-  transform: translateY(0px);
-}
-
-.cd-panel__container {
-  /*...*/
-  position: fixed;
-  width: 40%;
-  height: 100%;
-  top: 0;
-  transition: transform 0.3s 0.3s;
-}
-
-.cd-panel--from-right .cd-panel__container {
-  right: 0;
-  transform: translate3d(100%, 0, 0);
-}
-
-.cd-panel--from-left .cd-panel__container {
-  left: 0;
-  transform: translate3d(-100%, 0, 0);
-}
-
-.cd-panel--is-visible .cd-panel__container {
-  transform: translate3d(0, 0, 0);
-  transition-delay: 0s;
-}
-.cd-panel__header h1 {
-  color:black;
-  margin: 0;
-}
-.cd-panel.cd-panel--is-visible::after {
-  background-color: transparent;
-}
-</style>
-
+    #header, #header a {
+      color: white;
+    }
+    #slider {
+      width: 550px !important;
+      overflow: scroll !important;
+      background-color: #efefef;
+      padding: 20px;
+      color: #222;
+    font-size: 16px;
+    line-height: 1.5;
+    }
+    #slider h1 { margin-bottom:40px;}
+    #slider h2 { margin-bottom:20px; }
+  </style>
 </head>
-<body style="background:#444444;">
-
-  <div id="header">
-    
-    <!--
-    <input type="checkbox" checked="checked" /> Ressource 
-    <input type="checkbox" checked="checked" /> Evenement 
-    <input type="checkbox" checked="checked" /> Personne 
-    --
-    <input type="checkbox" checked="checked" /> Participant.e 
-    <input type="checkbox" /> Parainage 
-    <input type="checkbox"  /> Administrateur
-    --> 
-  </div>
-<main class="cd-main-content">
- <a href="#0" class="cd-btn js-cd-panel-trigger" data-panel="main">Click Jardin Cordial</a>
-  <div id="mynetwork"></div>
-</main>  
-<div class="cd-panel cd-panel--from-right js-cd-panel-main">
-  <header class="cd-panel__header">
-    <h1>Le Jardin Cordial</h1>
-    <a href="#0" class="cd-panel__close js-cd-close">Close</a>
-  </header>
-  <div class="cd-panel__container">
-    <div class="cd-panel__content" style="color:black">
-
-
-      <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
-      <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
-      <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
-      <p>
+<body>
+    <div id="mynetwork"></div>
+    <div id='slider'>
+        <h1 class="slider-titre">Titre</h1>
+        <div class="slider-gallery">
+          <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
+          <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
+          <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
+        </div>
         <h2> Présentation courte </h2>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque similique, at excepturi adipisci repellat ut veritatis officia, saepe nemo soluta modi ducimus velit quam minus quis reiciendis culpa ullam quibusdam eveniet. Dolorum alias ducimus, ad, vitae delectus eligendi, possimus magni ipsam repudiandae iusto placeat.
-      </p>
-      <p>
-        <h2>Présentation détaillée</h2>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque similique, at excepturi adipisci repellat ut veritatis officia, saepe nemo soluta modi ducimus velit quam minus quis reiciendis culpa ullam quibusdam eveniet. Dolorum alias ducimus, ad, vitae delectus eligendi, possimus magni ipsam repudiandae iusto placeat repellat omnis veritatis adipisci aliquam hic ullam facere voluptatibus ratione laudantium perferendis quos ut. Beatae expedita, itaque assumenda libero voluptatem adipisci maiores voluptas accusantium, blanditiis saepe culpa laborum iusto maxime quae aperiam fugiat odit consequatur soluta hic. Sed quasi beatae quia repellendus, adipisci facilis ipsa vel, aperiam, consequatur eaque mollitia quaerat. Iusto fugit inventore eveniet velit.
-      </p>
-      
-      <p>
-        <strong>Administrateur :</strong> <a href="">Bliana</a> <br />
-        <strong>Créé le : </strong>jj/mm/YYYY <br />
-        <strong>Last update : </strong> jj/mm/YYYY
-      </ul>
-</div> 
-</div> 
-</div> 
-<div class="demo-avd demo-avd--light js-demo-avd" style="bottom: 30px; left: 30px; background-color: #424f5c; top: auto;"></div>
+        <p class="slider-chapeau"></p>
+          <h2>Présentation longue</h2>
+          <p class="slider-contenu"></p>
 
 
-<script type="text/javascript">
-  var options = {
-    interaction: {
-          navigationButtons: true,
-          keyboard: true
-        },
-     physics: {
-          stabilization: false
-        },
-    autoResize: true,
-    nodes : {
-      shape: 'dot',
-      font:'16px proxima-nova white',
-    },
-    edges : {
-      color: 'white'
+      </div>
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+  <!-- https://nnattawat.github.io/slideReveal/ -->
+  <script src="jquery.slidereveal.min.js"></script>
 
+    <script type="text/javascript" src="node_modules/vis-network/dist/vis-network.min.js"></script>
+    <script src="https://unpkg.com/neo4j-driver"></script>
+  <script>
+    //initialize slider
+    var slider = $('#slider').slideReveal({
+        trigger: $("#trigger"),
+        position: "right",
+        push: false,
+        overlay: true
+      });
+
+    function createNode(v) {
+      var node = {};
+      node.id = v.identity.toInt();
+      node.name = v.properties.titre;
+      node.label = v.properties.titre;
+      if(v.labels[0] == "Personne") {
+        node.color = 'rgb(242,161,39)';
+        node.size = 10;
+      } else if(v.labels[0] == "Ressource") {
+        node.color="rgb(170,143,0)";
+        node.size = 20;
+      } else if(v.labels[0] == "Evenement") {
+        node.color="rgb(255,215,0)";
+        node.size = 30;
+      }
+      node.titre = v.properties.titre;
+      node.chapeau = v.properties.chapeau;
+      node.contenu = v.properties.contenu;
+      console.log("created node: ");
+      console.log(node);
+      return node;
     }
 
-  }
+    function createEdge(v) {
+      var edge = {};
+      edge.id = v.identity.toInt();
+      edge.from = v.start.toInt();
+      edge.to = v.end.toInt();
+      edge.title = '';
+      return edge;
+    }
+    //neo4jDriver.v1.types.Date
+    var options = {};
+    var nodes = new vis.DataSet([]);
+    var edges = new vis.DataSet([]);
 
-  // create an array with nodes
-  var nodes = new vis.DataSet([
-    {id: 1, size:10,label: 'AnnA',color: 'rgb(242,161,39)',},
-    {id: 2, size:10,label: 'Poulpe',shape: 'dot',color: 'rgb(242,161,39)'},
-    {id: 3, size:10,label: 'FurryBond',shape: 'dot',color: 'rgb(242,161,39)'},
-    {id: 4, size:10,label: 'Pample',shape: 'dot',color: 'rgb(242,161,39)'},
-    {id: 5, size:10,label: 'Yakari',shape: 'dot',color: 'rgb(242,161,39)'},
-    {id: 11, size:10,label: "vu de l'extérieur",color: 'rgb(242,161,39)',},
-    {id: 12, size:10,label: 'Lrt C.',color: 'rgb(242,161,39)',},
-    {id: 13, size:10,label: 'collectif des pulpes',color: 'rgb(242,161,39)',},
-    {id: 14, size:10,label: 'Serge',color: 'rgb(242,161,39)',},
-    {id: 15, size:10,label: 'vanocéane',color: 'rgb(242,161,39)',},
-    {id: 16, size:10,label: 'adeuxcorps',color: 'rgb(242,161,39)',},
-    {id: 17, size:10,label: 'Lrt',color: 'rgb(242,161,39)',},
-    {id: 18, size:10,label: 'Petalidou',color: 'rgb(242,161,39)',},
-    {id: 19, size:10,label: 'sebastien 82',color: 'rgb(242,161,39)',},
-    {id: 20, size:10,label: 'douxdingues',color: 'rgb(242,161,39)',},
-    {id: 21, size:10,label: 'Panda',color: 'rgb(242,161,39)',},
-    {id: 22, size:10,label: 'tranquill',color: 'rgb(242,161,39)',},
-    {id: 23, size:10,label: 'Hempi_shibari',color: 'rgb(242,161,39)',},
-    {id: 24, size:10,label: 'Bliana',color: 'rgb(242,161,39)',},
-    {id: 25, size:10,label: 'STEPH&ISA',color: 'rgb(242,161,39)',},
-    {id: 26, size:10,label: 'legato',color: 'rgb(242,161,39)',},
-    {id: 27, size:10,label: 'simone_jeanpaul',color: 'rgb(242,161,39)',},
-    {id: 28, size:10,label: 'Simone',color: 'rgb(242,161,39)',},
-    {id: 29, size:10,label: 'oulalaa69',color: 'rgb(242,161,39)',},
-    {id: 30, size:10,label: 'Guylaine & Christophe',color: 'rgb(242,161,39)',},
-    {id: 31, size:10,label: 'denyd26',color: 'rgb(242,161,39)',},
-    {id: 32, size:10,label: 'joël nadège',color: 'rgb(242,161,39)',},
-    {id: 33, size:10,label: 'Licencieuse-Lou',color: 'rgb(242,161,39)',},
-    {id: 34, size:10,label: 'Liebeskind',color: 'rgb(242,161,39)',},
-    {id: 35, size:10,label: 'Kael-Kinbaku',color: 'rgb(242,161,39)',},
-    {id: 41, size:10,label: 'titeJu',color: 'rgb(242,161,39)',},
-    {id: 42, size:10,label: 'damienPhoto',color: 'rgb(242,161,39)',},
+    var driver = neo4j.v1.driver("bolt://165.22.206.197", neo4j.v1.auth.basic("neo4j", "neo4j"));
+    var session = driver.session();
+    session
+      .run('MATCH (n)-[r]-(m) OPTIONAL MATCH (p) RETURN n,r,m,p', {limit: 3000})
+      .subscribe({
+        onNext: (record) => {
+        //construction dataPromise
+        const dataPromises = Object.values(record.toObject()).map(
+          async (v) => {
+            //neo4j.v1.types.Node
+            if (v instanceof neo4j.v1.types.Node) {
+              try {
+                node = createNode(v);
+                nodes.add(node);
+              } catch (e) {
+                //console.log(e);
+              }
 
-    {id: 6, size:20, label: '11em',shape: 'dot',color: 'rgb(170,143,0)'},
-    {id: 7, size:20, label: 'Roman-Sur-Isère',shape: 'dot',color: 'rgb(170,143,0)'},
-    {id: 8, size:20, label: 'Multitudes',shape: 'dot',color: 'rgb(170,143,0)'},
-    {id: 9, size:20, label: 'Soit-niant',shape: 'dot',color: 'rgb(170,143,0)'},
-    {id: 10, size:20,label: '31propositions-#1',shape: 'dot',color: 'rgb(170,143,0)'},
-    {id: 36, size:20,label: 'JukeBox',shape: 'dot',color: 'rgb(170,143,0)'},
-    {id: 37, size:20,label: 'TameTheFox',shape: 'dot',color: 'rgb(170,143,0)'},
-    {id: 38, size:20,label: 'ScreenCastYourPorn',shape: 'dot',color: 'rgb(170,143,0)'},
-    {id: 39, size:20,label: 'Règle lunaire',shape: 'dot',color: 'rgb(170,143,0)'},
-    {id: 40, size:20,label: 'Micro Shibari',shape: 'dot',color: 'rgb(170,143,0)'},
-    {id: 43, size:20,label: 'Photo By The River',shape: 'dot',color: 'rgb(170,143,0)'},
-    {id: 44, size:20,label: 'Retrospective DamienPhoto',shape: 'dot',color: 'rgb(170,143,0)'},
-    {id: 45, size:20,label: 'Le Graphe',shape: 'dot',color: 'rgb(170,143,0)'},
-    {id: 46, size:10,label: 'vivelepesto',color: 'rgb(242,161,39)',},
-    {id: 47, size:20,label: 'Jardin Cordial',shape: 'dot',color: 'rgb(170,143,0)'},
+            } else if (v instanceof neo4j.v1.types.Relationship) {
+              edge = createEdge(v);
+              edges.add(edge);
+            }  else if (v instanceof Neo4j.types.Path) {
+              var startNode = createNode(v.start);
+              var endNode = createNode(v.end);
 
-    {id: 48, size:30, label: 'Multitudes@11em',shape: 'dot',color: 'rgb(255,215,0)'},
-    {id: 49, size:30, label: 'JardinCordial@Meaux',shape: 'dot',color: 'rgb(255,215,0)'},
-    
-  ]);
+              nodes.add(startNode);
+              nodes.add(endNode);
 
-  // create an array with edges
+              for (let obj of v.segments) {
+                nodes.add(createNode(obj.start));
+                nodes.add(createNode(obj.end));
+                edges.add(createEdge(obj.relationship));
+              }
 
-  //parainage -- à inviter machin ou truc
-  //administrateur -- à l'origine du node
-  //participe -- à l'événement
-  //occurence -- entre ressource & événement
-  
-  var edges = new vis.DataSet([
-    {from: 10, to: 6},
-    {from: 10, to: 7},
-    {from: 9, to: 6},
-    {from: 8, to: 6},
-    {from: 1, to: 8},
-    {from: 1, to: 9},
-    {from: 4, to: 9},
-    {from: 5, to: 9},
-    {from: 2, to: 9},
-    {from: 1, to: 10},
-    {from: 2, to: 10},
-    {from: 3, to: 10},
-    {from: 4, to: 10},
-    {from: 5, to: 10},
-    {from: 31, to: 10},
-    {from: 36, to: 2},
-    {from: 36, to: 4},
-    {from: 37, to: 4},
-    {from: 38, to: 4},
-    {from: 39, to: 1},
-    {from: 41, to: 40},
-    {from: 40, to: 6},
-    {from: 43, to: 42},
-    {from: 43, to: 1},
-    {from: 43, to: 4},
-    {from: 44, to: 6},
-    {from: 44, to: 1},
-    {from: 44, to: 4},
-    {from: 44, to: 42},
-    {from: 45, to: 2},
-    {from: 45, to: 4},
-    {from: 45, to: 3},
-    {from: 46, to: 37},
-    
-    {from: 47, to: 24},
+            } else if (v instanceof Array) {
+              for (let obj of v) {
+                if (obj instanceof Neo4j.types.Node) {
+                  var node = createNode(obj);
+                  nodes.add(node);
 
-    //multitudes@11em
-    {from: 48, to: 8},
-    {from: 48, to: 6},
-    {from: 48, to: 1},
-    {from: 48, to: 4},
-    {from: 48, to: 5},
-
-    //Jardin Cordial @ meaux
-    {from: 49, to: 1},
-    {from: 49, to: 2},
-    {from: 49, to: 3},
-    {from: 49, to: 4},
-    {from: 49, to: 23},
-    {from: 49, to: 21},
-    {from: 49, to: 24},
-
-    //bliana(24) ADMINISTRATEUR JardinCordial(47)
-    //{from: 24, to: 47, color:{color:'red'}},
-    //bliana(24) ADMINISTRATEUR JardinCordial@Meaux(49)
-    //{from: 24, to: 49, color:{color:'yellow'}},
-    //bliana(24) PARTICIPE JardinCordial@Meaux(49)
-    {from: 24, to: 49, color:{color:'green'}},
-    //JardinCordial@Meaux(49) OCCURENCE JardinCordial(47)
-    {from: 49, to: 47, color:{color:'#cf455c'}}, 
-    //Claude(2) PARAIN bliana(24)
-    // {from: 2, to: 24, color:{color:'brown'}},
+                } else if (obj instanceof Neo4j.types.Relationship) {
+                  var edge = createEdge(obj);
+                  edges.add(edge);
+                }
+              }
+            }
+          }
+        );
+    },
+        onCompleted: function () {
+          session.close();
+        //console.log(nodes);
+        //console.log(edges);
+        },
+        onError: function (error) {
+          console.log(error);
+        }
+      });
 
 
+    // create a network
+    var options = {
+        interaction: {
+          hover:true,
+            navigationButtons: true,
+          keyboard: true
+        },
+        physics: {
+              stabilization: false
+            },
+        autoResize: true,
+        nodes : {
+          shape: 'dot',
+          font:'16px proxima-nova white',
+        },
+        edges : {
+          color: 'white'
 
-    
+        }
 
-  ]);
-
-  // create a network
-  var container = document.getElementById('mynetwork');
-  var data = {
-    nodes: nodes,
-    edges: edges
-  };
+      }
+    var container = document.getElementById('mynetwork');
+    var data = {
+      nodes: nodes,
+      edges: edges
+    };
 
   var network = new vis.Network(container, data, options);
-</script>
- <script type="text/javascript" src="slide.js"></script>
 
+  
+
+  network.on("selectNode", function (params) {
+        console.log('selectNode Event:', params.nodes[0]);
+        var currentNode = nodes.get(params.nodes[0]);
+        console.log(currentNode.name);
+        //populate slider
+        $(".slider-titre").html(currentNode.titre);
+        $(".slider-chapeau").html(currentNode.chapeau);
+        $(".slider-contenu").html(currentNode.contenu);
+        slider.slideReveal("show");
+    });
+  </script>
 
 </body>
 </html>
