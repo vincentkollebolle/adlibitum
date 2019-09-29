@@ -45,6 +45,12 @@ var edges = new vis.DataSet([]);
 function populateDataSets(query) {
   var driver = neo4j.v1.driver("bolt://165.22.206.197", neo4j.v1.auth.basic("neo4j", "neo4j"));
   var session = driver.session();
+  var inspectedEdges = []; //id of edges already created
+    // to check if an id is already inspected.
+  function isInArray(value, array) {
+    return array.indexOf(value) > -1;
+  }
+
   session
     .run(query, {limit: 3000})
     .subscribe({
@@ -55,15 +61,22 @@ function populateDataSets(query) {
           //neo4j.v1.types.Node
           if (v instanceof neo4j.v1.types.Node) {
             try {
-              node = createNode(v);
-              nodes.add(node);
+                node = createNode(v);
+                nodes.add(node);    
             } catch (e) {
               //console.log(e);
             }
 
           } else if (v instanceof neo4j.v1.types.Relationship) {
-            edge = createEdge(v);
-            edges.add(edge);
+              //get node id 
+              currentId = v.identity.toInt();
+              //check if edge already added
+              if(!isInArray(currentId,inspectedEdges)) {
+                edge = createEdge(v);
+                edges.add(edge);
+                inspectedEdges.push(currentId);
+              }
+
           }  else if (v instanceof Neo4j.types.Path) {
             var startNode = createNode(v.start);
             var endNode = createNode(v.end);
@@ -95,6 +108,7 @@ function populateDataSets(query) {
       onCompleted: function () {
         //vibration du noeud actu
         //battement();
+        inspectedEdges = [];
         session.close();
       
       },
