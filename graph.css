@@ -3,6 +3,10 @@
         background-color: #444444;
         font-family: 'proxima-nova', Helvetica;  
       }
+      /* no overlay */ 
+      .slide-reveal-overlay {
+          background: transparent !important;
+      }
       #mynetwork {
         width: 100%;
         height: 760px;
@@ -14,11 +18,19 @@
       #slider {
         width: 550px !important;
         overflow: scroll !important;
-        background-color: #efefef;
+        background-color: white;
         padding: 20px;
         color: #222;
-      font-size: 16px;
-      line-height: 1.5;
+        font-size: 16px;
+        line-height: 1.5;
       }
-      #slider h1 { margin-bottom:40px;}
-      #slider h2 { margin-bottom:20px; }
+      #slider h1 { margin-bottom:0;}
+      .slider-gallery { display: none;}
+      .slider-chapeau {
+          font-size:24px;
+          line-height: 26px;
+          color:grey;
+          font-weight: bold;
+          margin-bottom: 20px;
+          margin-top:5px;
+      }
