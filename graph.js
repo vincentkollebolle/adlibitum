@@ -3,7 +3,8 @@
     trigger: $("#trigger"),
     position: "right",
     push: false,
-    overlay: true
+    overlay: false,
+    autoEscape: false,
   });
 
 function createNode(v) {
@@ -38,12 +39,14 @@ function createEdge(v) {
 
 //neo4jDriver.v1.types.Date
 var options = {};
-var query = "MATCH (n)-[r]-(m) OPTIONAL MATCH (p) RETURN n,r,m,p";
+var localurl = "bolt://127.0.0.1"; // for dev only
+var url = "bolt://165.22.206.197"; // official
+var intialquery = "MATCH (n)-[r]-(m) OPTIONAL MATCH (p) RETURN n,r,m,p";
 var nodes = new vis.DataSet([]);
 var edges = new vis.DataSet([]);
 
 function populateDataSets(query) {
-  var driver = neo4j.v1.driver("bolt://165.22.206.197", neo4j.v1.auth.basic("neo4j", "neo4j"));
+  var driver = neo4j.v1.driver(localurl, neo4j.v1.auth.basic("neo4j", "neo4j"));
   var session = driver.session();
   var inspectedEdges = []; //id of edges already created
     // to check if an id is already inspected.
@@ -119,14 +122,14 @@ function populateDataSets(query) {
   }
 
 //populate Data Sets with Neo4j
-populateDataSets(query);
+populateDataSets(intialquery);
 
 // create a network
 var options = {
     interaction: {
-      hover:true,
+        hover:true,
         navigationButtons: true,
-      keyboard: true
+        keyboard: true
     },
     physics: {
           stabilization: false
@@ -152,28 +155,70 @@ network.on("selectNode", function (params) {
     var currentNode = nodes.get(params.nodes[0]);
     var newquery = "MATCH (n {titre: '"+currentNode.titre+"'})-[r]-(m) RETURN n,r,m";
     console.log(newquery);
-    nodes.clear();
-    edges.clear();
-    populateDataSets(newquery);
     //populate slider
     $(".slider-titre").html(currentNode.titre);
     $(".slider-chapeau").html(currentNode.chapeau);
     $(".slider-contenu").html(currentNode.contenu);
+    //populate slide form
+    $("#slider-titre-form").val(currentNode.titre);
+    $("#slider-chapeau-form").val(currentNode.chapeau);
+    $("#slider-contenu-form").val(currentNode.contenu);
+
     slider.slideReveal("show");
+    nodes.clear();
+    edges.clear();
+    populateDataSets(newquery);
     nodes.update();
 });
+
+
+function updateGraphAndSlider() {
+
+}
 
 var toUp = true;
 var size2update = 10;
 
-function back2graph() {
-    //console.log("old query:"+query);
-    query = "MATCH (n)-[r]-(m) OPTIONAL MATCH (p) RETURN n,r,m,p";
-    populateDataSets(query);
-    nodes.clear();
-    edges.clear();
-    nodes.update();
-}
+$("#back2graphButton").click(function () {
+  //console.log("old query:"+query);
+  slider.slideReveal("hide");
+  query = "MATCH (n)-[r]-(m) OPTIONAL MATCH (p) RETURN n,r,m,p";
+  populateDataSets(query);
+  nodes.clear();
+  edges.clear();
+  nodes.update();
+});
+
+$(".nodeEditButton").click(function() {
+  $("#nodeContent").hide();
+  $(".nodeEditButton").hide();
+  $("#nodeEditForm").show();
+});
+
+$("#nodeEditSubmitButton").click(function(e) {
+  e.preventDefault();
+ 
+  //populate slide form
+  var oldtitre =  $(".slider-titre").html();
+  var newtitre =  $("#slider-titre-form").val();
+  var chapeau = $("#slider-chapeau-form").val();
+  var contenu = $("#slider-contenu-form").val();
+  var query4update = 'MATCH (p { titre:"'+oldtitre+'" }) SET p = { titre:"'+newtitre+'", chapeau:"'+chapeau+'",contenu:"'+contenu+'" } RETURN p;';
+  $("#alertMessage .message").html(query4update);  
+  $("#alertMessage").show();
+  $("#nodeContent").show();
+  $(".nodeEditButton").show();
+  $("#nodeEditForm").hide();
+  slider.slideReveal("hide");
+  //execute query on session.
+  //populate alert message
+  //back2graph
+});
+
+$(".closeAlert").click(function() {
+  $("#alertMessage").hide();
+});
+
 //vibration 
 function battement() {
   if (toUp == true) {

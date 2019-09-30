@@ -1,32 +1,68 @@
+
 <!doctype html>
-<html>
+<html lang="fr">
 <head>
     <title>Adlibitum - Graphe</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link href="node_modules/vis-network/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
     <link href="graph.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <button onclick="back2graph()">Retour au graphe </button>
-    <div id="mynetwork"></div>
-    <div id='slider'>
-        <h1 class="slider-titre">Titre</h1>
-        <div class="slider-gallery">
-          <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
-          <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
-          <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
+    <div class="container-fluid">
+        <button id="back2graphButton" class="btn btn-outline-secondary">Retour au graphe </button>
+        <div id="alertMessage" style="position:absolute;top:10px;left:10px;" class="alert alert-warning alert-dismissible fade show" role="alert">
+                <span class="message"></span>
+                <a class="closeAlert">( fermer )</a> 
+                
+              </div>
+        <div id="mynetwork"></div>
+        <div id='slider'>
+          <div class="row">
+            <div class="col-md-9">
+                    <div id="nodeContent">
+                            <h1 class="slider-titre">Titre</h1>
+                            <div class="slider-gallery">
+                            <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
+                            <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
+                            <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
+                            </div>
+                            <div class="slider-chapeau"></div>
+                            <p class="slider-contenu"></p>
+                        </div>
+                        <div id="nodeEditForm">
+                            <form>
+                                <div class="form-group">
+                                    <label for="slider-titre-form">Titre</label>
+                                    <input class="form-control" id="slider-titre-form" type="text" value="" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="slider-chapeau-form">Description courte :</label>
+                                    <textarea rows="3" class="form-control" id="slider-chapeau-form"> </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="slider-contenu-form">Description longue :</label>
+                                    <textarea rows="4" class="form-control" id="slider-contenu-form"> </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-outline-secondary" id="nodeEditSubmitButton">Ok</button>
+                                </div>
+                            </form>
+                        </div>
+            </div>
+            <div class="col-md-3">
+                <button class="nodeEditButton btn btn-outline-secondary"> Modifier </button> 
+            </div>
         </div>
-        <div class="slider-chapeau"></div>
-        <p class="slider-contenu"></p>
-
-
-      </div>
-    <script
-        src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
-  <!-- https://nnattawat.github.io/slideReveal/ -->
-  <script src="jquery.slidereveal.min.js"></script>
+    </div>      
+</div>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+ 
+    <!-- https://nnattawat.github.io/slideReveal/ -->
+    <script src="jquery.slidereveal.min.js"></script>
 
     <script type="text/javascript" src="node_modules/vis-network/dist/vis-network.min.js"></script>
     <script src="https://unpkg.com/neo4j-driver"></script>
