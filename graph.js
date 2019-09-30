@@ -46,7 +46,7 @@ var nodes = new vis.DataSet([]);
 var edges = new vis.DataSet([]);
 
 function populateDataSets(query) {
-  var driver = neo4j.v1.driver(localurl, neo4j.v1.auth.basic("neo4j", "neo4j"));
+  var driver = neo4j.v1.driver(url, neo4j.v1.auth.basic("neo4j", "neo4j"));
   var session = driver.session();
   var inspectedEdges = []; //id of edges already created
     // to check if an id is already inspected.
