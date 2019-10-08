@@ -12,7 +12,7 @@
       #header, #header a {
         color: white;
       }
-      #slider {
+      .slider {
         width: 550px !important;
         overflow: scroll !important;
         background-color: white;

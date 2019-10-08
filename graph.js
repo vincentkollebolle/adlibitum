@@ -1,11 +1,31 @@
- //initialize slider
- var slider = $('#slider').slideReveal({
+ //initialize sliderContent
+ var slider = $('#sliderContent').slideReveal({
     trigger: $("#trigger"),
     position: "right",
     push: false,
     overlay: false,
     autoEscape: false,
   });
+
+// initialize sliderAddNode
+ var sliderAddNode = $('#sliderAddNode').slideReveal({
+    trigger: $("#AddNodeButton"),
+    position: "right",
+    push: false,
+    overlay: false,
+    autoEscape: false,
+  });
+
+ //initialize sliderAddEdge
+ var sliderAddEdge = $('#sliderAddEdge').slideReveal({
+    trigger: $("#AddEdgeButton"),
+    position: "right",
+    push: false,
+    overlay: false,
+    autoEscape: false,
+  });
+ 
+
 
 function createNode(v) {
   var node = {};
@@ -150,6 +170,7 @@ var network = new vis.Network(container, {nodes: nodes,edges: edges}, options);
 
 
 //click sur le graphe
+//https://github.com/almende/vis/issues/1820
 network.on("selectNode", function (params) {
     
     var currentNode = nodes.get(params.nodes[0]);
@@ -189,10 +210,19 @@ $("#back2graphButton").click(function () {
   nodes.update();
 });
 
+
+
 $(".nodeEditButton").click(function() {
   $("#nodeContent").hide();
   $(".nodeEditButton").hide();
   $("#nodeEditForm").show();
+});
+
+//close slider
+$(".closeSlider").click(function(e) {
+  slider.slideReveal("hide");
+  sliderAddNode.slideReveal("hide");
+  sliderAddEdge.slideReveal("hide");
 });
 
 $("#nodeEditSubmitButton").click(function(e) {
