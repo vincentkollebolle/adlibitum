@@ -14,20 +14,11 @@
     <link rel="stylesheet" href="node_modules/simplemde/dist/simplemde.min.css">
 </head>
 <body>
-    <div class="container-fluid">
+    <div id="ad-app" class="container-fluid">
         <!--header-->
-        <div class="row">
-            <div class="col-md-6">
-                <!--Retour au graphe-->
-                <button id="back2graphButton" class="btn btn-outline-secondary"> <i class="material-icons">home</i>  </button>
-                <!--Ajouter planete-->
-                <button class="triggerAdd btn btn-outline-secondary"> 
-                    <i class="material-icons">add_circle_outline</i> 
-                </button>
-            </div>
-        </div>
+        <ad-menu></ad-menu>
         <!--content-->
-        <div id="mynetwork"></div>
+        <ad-graph></ad-graph>
         <!--slider-->
         <div id="sliderAdd" class="slider">
             <div class="nodeAddPanel">
@@ -59,21 +50,21 @@
                             </div>
                             <div class="form-group">
                                 <label for="#panelAdd-mdeChapeau">Description courte :</label>
-                                <textarea 
-                                id="panelAdd-mdeChapeau" 
-                                rows="3" 
+                                <textarea
+                                id="panelAdd-mdeChapeau"
+                                rows="3"
                                 class="form-control" ></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="#panelAdd-mdeContenu">Description longue :</label>
-                                <textarea 
-                                id="panelAdd-mdeContenu" 
-                                rows="4" 
+                                <textarea
+                                id="panelAdd-mdeContenu"
+                                rows="4"
                                 class="form-control"></textarea>
                             </div>
                             <div class="form-group">
-                                <button 
-                                    class="btn btn-outline-secondary" 
+                                <button
+                                    class="btn btn-outline-secondary"
                                     type="submit">Ok</button>
                                 <button disabled="disabled" class="btn btn-outline-secondary">Annuler</button>
                             </div>
@@ -92,7 +83,7 @@
                         </div>
                         <!--Liens-->
                         <div class="panelMenuItem menuLink">
-                            <i class="material-icons">settings_ethernet</i> 
+                            <i class="material-icons">settings_ethernet</i>
                             <span class="badge badge-light numberOfRelation"></span>
                         </div>
                         <!-- image -->
@@ -120,10 +111,10 @@
                         <hr />
                         <div class="panel panelInfo" style="display:block;">
                             <div class="panelInfo-chapeau">
-                                
+
                             </div>
                             <div class="panelInfo-contenu">
-                               
+
 
                            </div>
                        </div>
@@ -131,7 +122,7 @@
                        <div class="panel panelLink">
                         <h2> Liens</h2>
                         <div class="panelLink-links">
-                             
+
                         </div>
                          <hr />
                          <h3> Ajouter un lien vers: </h3>
@@ -151,7 +142,7 @@
                                         <option>Le Onzième</option>
                                     </select>
                                 </div>
-                               
+
                                 <div class="col-md-4" style="padding-top:25px;">
                                     <button class="btn btn-primary">Ajouter</button>
                                 </div>
@@ -173,16 +164,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="#panelEdit-mdeChapeau">Description courte :</label>
-                                    <textarea 
-                                    id="panelEdit-mdeChapeau" 
-                                    rows="3" 
+                                    <textarea
+                                    id="panelEdit-mdeChapeau"
+                                    rows="3"
                                     class="form-control" ></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="#panelEdit-mdeContenu">Description longue :</label>
-                                    <textarea 
-                                    id="panelEdit-mdeContenu" 
-                                    rows="4" 
+                                    <textarea
+                                    id="panelEdit-mdeContenu"
+                                    rows="4"
                                     class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
@@ -191,17 +182,22 @@
                                 </div>
                             </form>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
-        </div>      
+        </div>
     </div>
+    <script src="lib/vue.min.js"></script>
+
+    <!-- Vue components -->
+    <script src="js/components/ad-graph.js"></script>
+    <script src="js/components/ad-menu.js"></script>
 
     <!--jQuery & Bootstrap -->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    
+
     <!--neo4j &  instanciation d'un driver neo4j Driver prêt à l'emploi-->
     <script src="https://unpkg.com/neo4j-driver"></script>
     <!--SimpleMarkDownEditor-->
@@ -216,9 +212,9 @@
     <!--sliders-->
     <script src="js/jquery.slidereveal.min.js"></script>
     <script src="js/sliders.js"></script>
-    <!--visJS --> 
+    <!--visJS -->
     <script src="js/graphViz.js"></script>
-    
-    
+
+    <script src="js/main.js"></script>
 </body>
 </html>
