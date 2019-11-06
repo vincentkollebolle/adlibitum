@@ -29,10 +29,58 @@
         <!--content-->
         <div id="mynetwork"></div>
         <!--slider-->
-        <div id="sliderAdd">
-            <h1>Slider Add </h1>
+        <div id="sliderAdd" class="slider">
+            <div class="nodeAddPanel">
+                <div class="row">
+                    <div class="col-md-1 panelMenu">
+                        <!-- info -->
+                        <div class="panelMenuItem menuInfo">
+                            <i class="material-icons">radio_button_unchecked</i>
+                        </div>
+                        <!-- Fermer -->
+                        <div class="panelMenuItem menuClose">
+                            <i class="material-icons">close</i>
+                        </div>
+                    </div>
+                    <div class="col-md-11 panelContent">
+                        <h1 class="panelTitre">Ajouter un noeud</h1>
+                        <form>
+                            <div class="form-group">
+                                <label for="slider-titre-form">Titre</label>
+                                <input class="form-control" id="panelAdd-titre" type="text" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="panelAdd-type">Type</label>
+                                <select class="form-control" id="panelAdd-type">
+                                    <option value="Ressource">Ressource</option>
+                                    <option value="Personne">Personne</option>
+                                    <option value="Evenement">Événement</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="#panelAdd-mdeChapeau">Description courte :</label>
+                                <textarea 
+                                id="panelAdd-mdeChapeau" 
+                                rows="3" 
+                                class="form-control" ></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="#panelAdd-mdeContenu">Description longue :</label>
+                                <textarea 
+                                id="panelAdd-mdeContenu" 
+                                rows="4" 
+                                class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-outline-secondary" id="nodeAddSubmitButton">Ok</button>
+                                <button disabled="disabled" class="btn btn-outline-secondary">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="sliderContent">
+        <div id="sliderContent" class="slider">
             <h1>Slider Content </h1>
         </div>      
     </div>
@@ -40,38 +88,23 @@
     <!--jQuery & Bootstrap -->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <!--slider-->
-    <script src="js/jquery.slidereveal.min.js"></script>
-    <script src="js/sliderinit.js"></script>
-
+    
     <!--neo4j &  instanciation d'un driver neo4j Driver prêt à l'emploi-->
     <script src="https://unpkg.com/neo4j-driver"></script>
     <script type="text/javascript" src="node_modules/vis-network/dist/vis-network.min.js"></script>
     <script src="js/service.js"></script>
-
+    <!--class Node-->
+    <script src="js/Node.js"></script>
     <!--visJS --> 
     <script src="js/graphViz.js"></script>
-
     <!--SimpleMarkDownEditor-->
     <script src="node_modules/simplemde/dist/simplemde.min.js"></script>
+    <!--sliders-->
+    <script src="js/jquery.slidereveal.min.js"></script>
+    <script src="js/sliders.js"></script>
+    
     <script>
-         //initialize sliderAdd
-         var slider = $('#sliderAdd').slideReveal({
-            trigger: $("#triggerAdd"),
-            position: "right",
-            push: false,
-            overlay: false,
-            autoEscape: false,
-          });
-         //initialize sliderContent
-         var slider = $('#sliderContent').slideReveal({
-            trigger: $("#triggerContent"),
-            position: "right",
-            push: false,
-            overlay: false,
-            autoEscape: false,
-          });
+         
     </script>
 </body>
 </html>
