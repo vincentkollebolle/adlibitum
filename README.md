@@ -18,7 +18,7 @@ Todo
 [*] connection bdd neo4j (neo4jDriver)
 [*] affichage du graphe (VisJS) 
 [*] click sur un noeud ouvre volet affichage
-[] Système d'onglet dans les volets
+[*] Système d'onglet dans les volets
 [] Onglet Ajouter un noeud
 [] Onglet Editer un noeud
 [] Click sur un noeud recharge graphe sur le node en question

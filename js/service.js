@@ -1,4 +1,9 @@
 /* create driver and session */
+var localurl = "bolt://127.0.0.1"; // for dev only
+var url = "bolt://165.22.206.197"; // official
+var intialquery = "MATCH (n)-[r]-(m) OPTIONAL MATCH (p) RETURN n,r,m,p";
+
+//config
 var driver = neo4j.v1.driver(url, neo4j.v1.auth.basic("neo4j", "neo4j"));
 var session = driver.session();
 
@@ -88,16 +93,28 @@ function reloadFromNode(titre) {
   console.log(cypherquery);
 }
 
-/* Web service call to create a new Node */
-function serviceCreateNode(type, titre, chapeau,contenu) {
+/* ---------------------------------------------------------------- */
+/* Run Simple Query */
+function executeSimpleQuery(cypherQuery) {
+  session.run(cypherQuery).subscribe({
+    onNext: function () {},
+    onCompleted: function () { alert("OK"); },
+    onError: function (error) {  alert("not OK");}
+  });
+}
+/* 
+  Web service call to create a new Node 
+  Dependency : Node.js
+*/
+function serviceCreateNode(node) {
   var cypherquery = `
-    CREATE (n:${type} {
-      titre:"${titre}", 
-      chapeau:"${chapeau}", 
-      contenu:"${contenu}"
+    CREATE (n:${node.type} {
+      titre:"${node.titre}", 
+      chapeau:"${node.chapeau}", 
+      contenu:"${node.contenu}"
     }) 
     RETURN n`;
-  console.log(cypherquery);
+  executeSimpleQuery(cypherquery);
 }
 
 /* /!\ TODO : Web service call to create a new Relation */

@@ -112,9 +112,9 @@
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="js/Node.js"></script>
     <script src="https://unpkg.com/neo4j-driver"></script>
-    <!-- https://nnattawat.github.io/slideReveal/ -->
+    <script src="js/Node.js"></script>
+    <script src="js/service.js"></script>
     <script src="node_modules/simplemde/dist/simplemde.min.js"></script>
     <script>
         //init SimpleMarkdownEditor
@@ -137,9 +137,8 @@
             contenu = panelAddMdeContenu.value();
             //create node
             node2add = new Node(0, type, titre, chapeau, contenu);
-            console.log(node2add);
-            //call service to add node
-            //say everything fine !
+            //execute query
+            serviceCreateNode(node2add);
         });
 
     </script>

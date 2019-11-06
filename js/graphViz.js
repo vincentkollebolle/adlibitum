@@ -1,4 +1,19 @@
 
+var options = {
+    interaction: {
+        hover:true,
+        navigationButtons: true,
+        keyboard: true
+    },
+    physics: { stabilization: false},
+    autoResize: true,
+    nodes : {
+      shape: 'dot',
+        font:'16px proxima-nova white',
+    },
+    edges : { color: 'white'}
+}
+
 
 function createNode(v) {
   var node = {};
@@ -39,6 +54,14 @@ function redrawGraph() {
   nodes.update();
 }
 
+/* start */
+var nodes = new vis.DataSet([]);
+var edges = new vis.DataSet([]); 
+populateDataSets(intialquery);
+
+var container = document.getElementById('mynetwork');
+var network = new vis.Network(container, {nodes: nodes,edges: edges}, options);
+var selectedNode = null; 
 
 
 

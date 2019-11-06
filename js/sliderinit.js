@@ -1,11 +1,4 @@
- //initialize sliderContent
- var slider = $('#sliderContent').slideReveal({
-    trigger: $("#trigger"),
-    position: "right",
-    push: false,
-    overlay: false,
-    autoEscape: false,
-  });
+
 
 // initialize sliderAddNode
  var sliderAddNode = $('#sliderAddNode').slideReveal({

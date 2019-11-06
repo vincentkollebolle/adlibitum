@@ -15,226 +15,63 @@
 </head>
 <body>
     <div class="container-fluid">
+        <!--header-->
         <div class="row">
             <div class="col-md-6">
                 <!--Retour au graphe-->
                 <button id="back2graphButton" class="btn btn-outline-secondary"> <i class="material-icons">home</i>  </button>
                 <!--Ajouter planete-->
-                <button id="AddNodeButton" class="btn btn-outline-secondary"> 
+                <button id="triggerAdd" class="btn btn-outline-secondary"> 
                     <i class="material-icons">add_circle_outline</i> 
                 </button>
-                <!--Ajouter relation-->
-                <button id="AddEdgeButton" class="btn btn-outline-secondary"> 
-                    <i class="material-icons">settings_ethernet</i> 
-                </button>
-
-                <!--i class="material-icons">notifications_none</i-->
             </div>
         </div>
-        <div id="alertMessage" style="position:absolute;top:10px;left:10px;" class="alert alert-warning alert-dismissible fade show" role="alert">
-            <span class="message"></span>
-            <a class="closeAlert">( fermer )</a> 
-
+        <!--content-->
+        <div id="mynetwork"></div>
+        <!--slider-->
+        <div id="sliderAdd">
+            <h1>Slider Add </h1>
         </div>
-        <!--div id="mynetwork"></div-->
-        
-        
-        <div class="slider">
-            <div class="sliderMenu">
-                <div class="sliderMenuItem">Info</div>
-                <div class="sliderMenuItem">Liens</div>
-                <div class="sliderMenuItem">Gallerie</div>
-                <div class="sliderMenuItem">Modifer</div>
-                <div class="sliderMenuItem">Supprimer</div>
-                <div class="sliderMenuItem">Fermer</div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <span class="badge badge-secondary slider-id"></span>
-                </div>
-                <div class="col-md-9 text-right">
-                    
-                    <button disabled="disabled" class="nodeDeleteButton btn btn-outline-secondary btn-sm"> 
-                        <i class="material-icons">delete_outline</i> 
-                    </button> 
-                    <button class="nodeEditButton btn btn-outline-secondary btn-sm"> 
-                        <i class="material-icons">edit</i> 
-                    </button>
-                    <button class="closeSlider btn btn-outline-secondary btn-sm">
-                        <i class="material-icons">close</i>
-                    </button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="nodeContent">
-                        <h1 class="slider-titre">Titre</h1>
-                        <div class="slider-chapeau"></div>
-                        <p class="slider-contenu"></p>
-                        <hr /> 
-                        <h3>Liens :</h3>
-                        <ul>
-                            <li>XXX <button disabled="disabled" class="btn btn-sm btn-outline-secondary"> <i class="material-icons">delete_outline</i></button> </li>
-                            <li>YYY  <button disabled="disabled" class="btn btn-sm btn-outline-secondary"> <i class="material-icons">delete_outline</i></button> </li>
-                            <li>ZZZ  <button disabled="disabled" class="btn btn-sm btn-outline-secondary"> <i class="material-icons">delete_outline</i></button> </li>
-                        </ul>
+        <div id="sliderContent">
+            <h1>Slider Content </h1>
+        </div>      
+    </div>
 
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div id="nodeEditForm">
-                        <form>
-                            <div class="form-group">
-                                <label for="slider-titre-form">Titre</label>
-                                <input class="form-control" id="slider-titre-form" type="text" value="" />
-                            </div>
-                            <div class="form-group">
-                                <label for="slider-chapeau-form">Description courte :</label>
-                                <textarea id="mdeEditNodeChapeauArea" rows="3" class="form-control" id="slider-chapeau-form"> </textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="slider-contenu-form">Description longue :</label>
-                                <textarea id="mdeEditNodeContenuArea" rows="4" class="form-control" id="slider-contenu-form"> </textarea>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-outline-secondary" id="nodeEditSubmitButton">Ok</button>
-                                <button disabled="disabled" class="btn btn-outline-secondary" id="nodeEditSubmitButton">Annuler</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--SliderAddNode-->
-        <div id='sliderAddNode' class="slider">
-            <div class="row">
-                <div class="col-md-10">
-                    <h1>Ajouter une planete</h1>
-                </div>
-                <div class="col-md-2 text-right">
-                    <button class="closeSlider btn btn-outline-secondary">
-                        <i class="material-icons">close</i>
-                    </button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-10">
-                    <form class="form">
-                        <div class="form-group">
-                            <label for="#planeteType">Type : </label>
-                            <select id="planeteType"  class="form-control">
-                                <option value="Personne">Personne</option>
-                                <option value="Ressource">Ressource</option>
-                                <option value="Evenement">Evenement</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Titre</label>
-                            <input id="titreField" type="text" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label>Date</label>
-                            <input disabled="disabled" type="text"  class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label>Image</label>
-                            <input disabled="disabled" type="text"  class="form-control" placeholder="Url de l'image" />
-                        </div>
-                        <div class="form-group">
-                            <label>Chapeau</label><br />
-                            <textarea id="chapeauArea"  class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Contenu</label><br />
-                            <textarea id="mdeAddNodeContenuArea"  class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button id="addNodeFormButton" class="btn btn-outline-secondary">Ajouter</button>
-                            <button class="btn btn-outline-secondary">Annuler</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+    <!--jQuery & Bootstrap -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
-        <!--SliderAddEdge-->
-        <div id='sliderAddEdge' class="slider">
-            <div class="row">
-                <div class="col-md-10">
-                    <h1>Ajouter une relation</h1>
-                </div>
-                <div class="col-md-2 text-right">
-                    <button class="closeSlider btn btn-outline-secondary">
-                        <i class="material-icons">close</i>
-                    </button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-10">
-                    <form class="form">
-                        <div class="form-group">
-                            <label for="#planeteType">Type : </label>
-                            <select id="planeteType"  class="form-control">
-                                <option value="Participe">Participe</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Id planète de départ:</label>
-                            <select  id="fromSelect" class="form-control">
-                                <option>Personne: Anna</option>
-                                <option>Ressource: Onzieme</option>
-                                <option>Personne: Poulpe</option>
-                                <option>Personne: Pample</option>
-                            </select>  
-                        </div>
+    <!--slider-->
+    <script src="js/jquery.slidereveal.min.js"></script>
+    <script src="js/sliderinit.js"></script>
 
-                        <div class="form-group">
-                            <label>Id planète d'arrivée:</label>
-                            <input id="to" type="text" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <button id="addEdgeFormButton" class="btn btn-outline-secondary">Ajouter</button>
-                            <button class="btn btn-outline-secondary">Annuler</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        
+    <!--neo4j &  instanciation d'un driver neo4j Driver prêt à l'emploi-->
+    <script src="https://unpkg.com/neo4j-driver"></script>
+    <script type="text/javascript" src="node_modules/vis-network/dist/vis-network.min.js"></script>
+    <script src="js/service.js"></script>
 
-    </div>      
-</div>
-<script src="node_modules/jquery/dist/jquery.min.js"></script>
-<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--visJS --> 
+    <script src="js/graphViz.js"></script>
 
-<!-- https://nnattawat.github.io/slideReveal/ -->
-<script src="js/jquery.slidereveal.min.js"></script>
-<script src="js/sliderinit.js"></script>
-<script type="text/javascript" src="node_modules/vis-network/dist/vis-network.min.js"></script>
-<script src="https://unpkg.com/neo4j-driver"></script>
-<script src="node_modules/simplemde/dist/simplemde.min.js"></script>
-<script src="js/config.js"></script>
-<script src="js/graph.js"></script>
-<script src="js/service.js"></script>
-<script>
-    // 0./ configure connexion
-    
-    // 1./ Récupérer les données.
-    var intialquery = "MATCH (n)-[r]-(m) OPTIONAL MATCH (p) RETURN n,r,m,p";
-    var nodes = new vis.DataSet([]);
-    var edges = new vis.DataSet([]); 
-    populateDataSets(intialquery);
-    
-    // 2./ créer le graphe
-    var container = document.getElementById('mynetwork');
-    var network = new vis.Network(container, {nodes: nodes,edges: edges}, options);
-    var selectedNode = null; 
-
-
-
-    
-</script>
-<script src="js/ihm.js"></script>
-
+    <!--SimpleMarkDownEditor-->
+    <script src="node_modules/simplemde/dist/simplemde.min.js"></script>
+    <script>
+         //initialize sliderAdd
+         var slider = $('#sliderAdd').slideReveal({
+            trigger: $("#triggerAdd"),
+            position: "right",
+            push: false,
+            overlay: false,
+            autoEscape: false,
+          });
+         //initialize sliderContent
+         var slider = $('#sliderContent').slideReveal({
+            trigger: $("#triggerContent"),
+            position: "right",
+            push: false,
+            overlay: false,
+            autoEscape: false,
+          });
+    </script>
 </body>
 </html>
