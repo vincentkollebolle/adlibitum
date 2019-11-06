@@ -1,6 +1,12 @@
 /* create driver and session */
 var localurl = "bolt://127.0.0.1"; // for dev only
 var url = "bolt://165.22.206.197"; // official
+
+// On localhost, use the URL to the local service.
+if (window.location.hostname === 'localhost') {
+    url = "bolt://localhost";
+}
+
 var intialquery = "MATCH (n)-[r]-(m) OPTIONAL MATCH (p) RETURN n,r,m,p";
 
 //config
@@ -26,12 +32,12 @@ function populateDataSets(query) {
             if (v instanceof neo4j.v1.types.Node) {
               try {
                 node = createNode(v);
-                nodes.add(node);    
+                nodes.add(node);
               } catch (e) {
                 //console.log(e);
               }
             } else if (v instanceof neo4j.v1.types.Relationship) {
-                //get node id 
+                //get node id
                 currentId = v.identity.toInt();
                 //check if edge already added
                 if(!isInArray(currentId,inspectedEdges)) {
@@ -71,7 +77,7 @@ function populateDataSets(query) {
         //battement();
         inspectedEdges = [];
         session.close();
-      
+
       },
       onError: function (error) {
         console.log(error);
@@ -102,17 +108,17 @@ function executeSimpleQuery(cypherQuery) {
     onError: function (error) {  alert("not OK");}
   });
 }
-/* 
-  Web service call to create a new Node 
+/*
+  Web service call to create a new Node
   Dependency : Node.js
 */
 function serviceCreateNode(node) {
   var cypherquery = `
     CREATE (n:${node.type} {
-      titre:"${node.titre}", 
-      chapeau:"${node.chapeau}", 
+      titre:"${node.titre}",
+      chapeau:"${node.chapeau}",
       contenu:"${node.contenu}"
-    }) 
+    })
     RETURN n`;
   executeSimpleQuery(cypherquery);
 }
@@ -125,12 +131,12 @@ function serviceCreateEdge() {
 
 /* Web service call to update a node */
 function serviceUpdateNode(oldtitre,newtitre,chapeau,contenu) {
-  var cypherquery = `MATCH (p { titre:"${oldtitre}" }) 
-  SET p = { 
-    titre:"${newtitre}", 
+  var cypherquery = `MATCH (p { titre:"${oldtitre}" })
+  SET p = {
+    titre:"${newtitre}",
     chapeau:"${chapeau}",
-    contenu:"${contenu}" 
-  } 
+    contenu:"${contenu}"
+  }
   RETURN p;`;
   console.log(cypherquery);
 }
