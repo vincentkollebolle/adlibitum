@@ -21,7 +21,7 @@
                 <!--Retour au graphe-->
                 <button id="back2graphButton" class="btn btn-outline-secondary"> <i class="material-icons">home</i>  </button>
                 <!--Ajouter planete-->
-                <button id="triggerAdd" class="btn btn-outline-secondary"> 
+                <button class="triggerAdd btn btn-outline-secondary"> 
                     <i class="material-icons">add_circle_outline</i> 
                 </button>
             </div>
@@ -38,13 +38,13 @@
                             <i class="material-icons">radio_button_unchecked</i>
                         </div>
                         <!-- Fermer -->
-                        <div class="panelMenuItem menuClose">
+                        <div class="panelMenuItem menuClose triggerAdd">
                             <i class="material-icons">close</i>
                         </div>
                     </div>
                     <div class="col-md-11 panelContent">
                         <h1 class="panelTitre">Ajouter un noeud</h1>
-                        <form>
+                        <form id="formAddNode">
                             <div class="form-group">
                                 <label for="slider-titre-form">Titre</label>
                                 <input class="form-control" id="panelAdd-titre" type="text" value="" />
@@ -72,7 +72,9 @@
                                 class="form-control"></textarea>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-outline-secondary" id="nodeAddSubmitButton">Ok</button>
+                                <button 
+                                    class="btn btn-outline-secondary" 
+                                    type="submit">Ok</button>
                                 <button disabled="disabled" class="btn btn-outline-secondary">Annuler</button>
                             </div>
                         </form>
@@ -81,7 +83,118 @@
             </div>
         </div>
         <div id="sliderContent" class="slider">
-            <h1>Slider Content </h1>
+            <div class="nodeEditPanel">
+                <div class="row">
+                    <div class="col-md-1 panelMenu">
+                        <!-- info -->
+                        <div class="panelMenuItem menuInfo">
+                            <i class="material-icons">radio_button_unchecked</i>
+                        </div>
+                        <!--Liens-->
+                        <div class="panelMenuItem menuLink">
+                            <i class="material-icons">settings_ethernet</i> 
+                            <span class="badge badge-light numberOfRelation"></span>
+                        </div>
+                        <!-- image -->
+                        <div class="panelMenuItem menuImages">
+                            <i class="material-icons">photo_library</i>
+                        </div>
+                        <!--modifier-->
+                        <div class="panelMenuItem menuEdit">
+                            <i class="material-icons">edit</i>
+                        </div>
+                        <!-- supprimer -->
+                        <div class="panelMenuItem menuDelete">
+                            <i class="material-icons">delete_outline</i>
+                        </div>
+                        <!-- Fermer -->
+                        <div class="panelMenuItem menuClose triggerContent">
+                            <i class="material-icons">close</i>
+                        </div>
+                    </div>
+                    <div class="col-md-11 panelContent">
+                        <div>
+                            <span class="panelType badge badge-primary"></span>
+                            <h1 class="panelTitre"></h1>
+                        </div>
+                        <hr />
+                        <div class="panel panelInfo" style="display:block;">
+                            <div class="panelInfo-chapeau">
+                                
+                            </div>
+                            <div class="panelInfo-contenu">
+                               
+
+                           </div>
+                       </div>
+
+                       <div class="panel panelLink">
+                        <h2> Liens</h2>
+                        <div class="panelLink-links">
+                             
+                        </div>
+                         <hr />
+                         <h3> Ajouter un lien vers: </h3>
+                         <div class="panelLink-form">
+                             <div class="form-group row">
+                                 <div class="col-md-12">
+                                    <label for="">Type:</label>
+                                    <select class="form-control form-control-sm">
+                                        <option>Participe</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="">Vers:</label>
+                                    <select class="form-control form-control-sm">
+                                        <option>AnnA</option>
+                                        <option>Pample</option>
+                                        <option>Le Onzième</option>
+                                    </select>
+                                </div>
+                               
+                                <div class="col-md-4" style="padding-top:25px;">
+                                    <button class="btn btn-primary">Ajouter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="panel panelImages" style="margin-bottom:40px;">
+                            <h2>Images </h2>
+                            <em> Pas d'images pour le moment ...</em>
+                        </div>
+
+                        <div class="panel panelEdit">
+                            <h2> Modifier </h2>
+                            <form>
+                                <div class="form-group">
+                                    <label for="slider-titre-form">Titre</label>
+                                    <input class="form-control" id="slider-titre-form" type="text" value="" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="#panelEdit-mdeChapeau">Description courte :</label>
+                                    <textarea 
+                                    id="panelEdit-mdeChapeau" 
+                                    rows="3" 
+                                    class="form-control" ></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="#panelEdit-mdeContenu">Description longue :</label>
+                                    <textarea 
+                                    id="panelEdit-mdeContenu" 
+                                    rows="4" 
+                                    class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-outline-secondary" id="nodeEditSubmitButton">Ok</button>
+                                    <button disabled="disabled" class="btn btn-outline-secondary" id="nodeEditSubmitButton">Annuler</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
         </div>      
     </div>
 
@@ -91,20 +204,21 @@
     
     <!--neo4j &  instanciation d'un driver neo4j Driver prêt à l'emploi-->
     <script src="https://unpkg.com/neo4j-driver"></script>
+    <!--SimpleMarkDownEditor-->
+    <script src="node_modules/simplemde/dist/simplemde.min.js"></script>
     <script type="text/javascript" src="node_modules/vis-network/dist/vis-network.min.js"></script>
     <script src="js/service.js"></script>
     <!--class Node-->
     <script src="js/Node.js"></script>
-    <!--visJS --> 
-    <script src="js/graphViz.js"></script>
-    <!--SimpleMarkDownEditor-->
-    <script src="node_modules/simplemde/dist/simplemde.min.js"></script>
+    <!--gestion des Panel-->
+    <script src="js/panelAdd.js"></script>
+    <script src="js/panelEdit.js"></script>
     <!--sliders-->
     <script src="js/jquery.slidereveal.min.js"></script>
     <script src="js/sliders.js"></script>
+    <!--visJS --> 
+    <script src="js/graphViz.js"></script>
     
-    <script>
-         
-    </script>
+    
 </body>
 </html>

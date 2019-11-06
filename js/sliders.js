@@ -1,6 +1,6 @@
 //initialize sliderAdd
-var slider = $('#sliderAdd').slideReveal({
-  trigger: $("#triggerAdd"),
+var sliderAdd = $('#sliderAdd').slideReveal({
+  trigger: $(".triggerAdd"),
   position: "right",
   push: false,
   overlay: false,
@@ -8,17 +8,17 @@ var slider = $('#sliderAdd').slideReveal({
 });
 
 //initialize sliderContent
-         var slider = $('#sliderContent').slideReveal({
-          trigger: $("#triggerContent"),
-          position: "right",
-          push: false,
-          overlay: false,
-          autoEscape: false,
-        });
+var sliderContent = $('#sliderContent').slideReveal({
+  trigger: $(".triggerContent"),
+  position: "right",
+  push: false,
+  overlay: false,
+  autoEscape: false,
+});
 
 //close slider
-        $(".closeSlider").click(function(e) {
-          slider.slideReveal("hide");
-          sliderAddNode.slideReveal("hide");
-          sliderAddEdge.slideReveal("hide");
-        });
+$(".closeSlider").click(function(e) {
+  slider.slideReveal("hide");
+  sliderAddNode.slideReveal("hide");
+  sliderAddEdge.slideReveal("hide");
+});

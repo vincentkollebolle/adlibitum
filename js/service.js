@@ -19,7 +19,6 @@ function isInArray(value, array) {
 }
 
 function populateDataSets(query) {
-  console.log('pooulate with query: '+query);
   var inspectedEdges = []; //id of edges already created
   session
     .run(query, {limit: 3000})
@@ -102,6 +101,7 @@ function reloadFromNode(titre) {
 /* ---------------------------------------------------------------- */
 /* Run Simple Query */
 function executeSimpleQuery(cypherQuery) {
+  console.log("will execute soon : "+cypherQuery);
   session.run(cypherQuery).subscribe({
     onNext: function () {},
     onCompleted: function () { alert("OK"); },

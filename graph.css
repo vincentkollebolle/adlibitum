@@ -63,3 +63,45 @@ body {
 }
 .panelLink-item { margin-bottom:10px; }
 .panelInfo, .panelLink, .panelImages, .panelEdit { display: none; }
+
+.nodeEditPanel { 
+        margin-top:20px;
+    }
+    .active {  
+        font-weight: bold;
+        background-color: #efefef;
+    }
+    .panelContent { 
+        background:white;
+        padding: 20px;
+    }
+    .panelMenu {
+
+    }
+    .panelMenuItem { 
+        padding:10px;
+        cursor: pointer;
+        background: white;
+    }
+    .panelMenuItem:hover { 
+        background: #efefef;
+    }
+    
+    .btn {
+        margin-bottom:10px;
+    }
+    
+
+    .panelInfo-chapeau {
+      font-size:20px;
+      line-height: 22px;
+      color:grey;
+      font-weight: bold;
+      margin-bottom: 20px;
+      margin-top:5px;
+  }
+  .panelContent div:first-child {
+    margin-bottom: 20px;
+}
+.panelLink-item { margin-bottom:10px; }
+.panelInfo, .panelLink, .panelImages, .panelEdit { display: none; }
