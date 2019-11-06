@@ -1,0 +1,15 @@
+version: "3"
+services:
+    web:
+        image: nginx
+        ports:
+            - "8000:80"
+        volumes:
+            - .:/usr/share/nginx/html
+    database:
+        image: neo4j
+        environment:
+            - NEO4J_AUTH=none
+        ports:
+            - "7474:7474"
+            - "7687:7687"
