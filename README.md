@@ -1,39 +1,28 @@
-HTML5 Background Video
+ICC, In Case Of Collapse
 ======================
+v0.0.1 beta
 
-Want to play a video in the background of a container or `body` itself ? This plugin will help you do exactly that. I'd suggest you to [read this article](http://codetheory.in/html5-fullscreen-background-video/) too.
+Desc.
+=======
+Ouvrir des perspectives
+Ouvrir des potentiels
+Stimuler le pouvoir de création y compris chez ceux qui ne se revendiquent pas encore comme artiste car c’est un enjeu de civilisation.
+Proposition à interpréter librement.
+Le désir fait mondeS
+Réflexion sur les micro-culture et les réseau pair-à-pair.
+Logiciel de visualisation de graphe neo4j.
+Outil d'organisation et de documentation du collectif Adlibitum. 
 
-[**Demo**](http://rishabhp.github.io/bideo.js/)
-
-Features
---------
-
-### Resizing
-
-The `video` element in use will automatically adapt to the container's dimensions. It will also resize as the browser window resizes.
-
-### Overlay
-
-Plugin doesn't supports any overlay as it is easy to implement that with plain HTML/CSS in [your code](http://codetheory.in/html5-fullscreen-background-video/#overlays).
-
-### Video Cover
-
-Video might take a few seconds to load, especially because the sources are added via JS which is something you'll load after the DOM's loading. Till then you may want to show a video cover which'll be same as the first frame or the video (or some other image).
-
-The support for this is not in the plugin as it's fairly simple to achieve this via just HTML/CSS (just like overlays). Check the demo!
-
-### Network Speed
-
-[Read this](http://codetheory.in/html5-fullscreen-background-video/#network_speed).
-
-Options
--------
-
-Check `main.js`.
-
-More on HTML5 Video/Audio
--------------------------
-
-- https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Media_events
-- http://www.w3schools.com/tags/ref_av_dom.asp
-# adlibitum
+Todo
+=====
+[*] connection bdd neo4j (neo4jDriver)
+[*] affichage du graphe (VisJS) 
+[*] click sur un noeud ouvre volet affichage
+[] Système d'onglet dans les volets
+[] Onglet Ajouter un noeud
+[] Onglet Editer un noeud
+[] Click sur un noeud recharge graphe sur le node en question
+[] Supprimer un noeud
+[] Supprimer une relation depuis un noeud
+[] Ajouter une relation depuis un noeud
+[] Splash screen choix du graphe

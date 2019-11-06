@@ -11,18 +11,21 @@
     <link href="graph.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
     rel="stylesheet">
+    <link rel="stylesheet" href="node_modules/simplemde/dist/simplemde.min.css">
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <button id="back2graphButton" class="btn btn-outline-secondary"> <i class="material-icons">home</i> Retour au graphe </button>
+                <!--Retour au graphe-->
+                <button id="back2graphButton" class="btn btn-outline-secondary"> <i class="material-icons">home</i>  </button>
+                <!--Ajouter planete-->
                 <button id="AddNodeButton" class="btn btn-outline-secondary"> 
-                    <i class="material-icons">add_circle_outline</i> Ajouter planete
+                    <i class="material-icons">add_circle_outline</i> 
                 </button>
-
+                <!--Ajouter relation-->
                 <button id="AddEdgeButton" class="btn btn-outline-secondary"> 
-                    <i class="material-icons">settings_ethernet</i> Ajouter relation
+                    <i class="material-icons">settings_ethernet</i> 
                 </button>
 
                 <!--i class="material-icons">notifications_none</i-->
@@ -33,23 +36,32 @@
             <a class="closeAlert">( fermer )</a> 
 
         </div>
-        <div id="mynetwork"></div>
+        <!--div id="mynetwork"></div-->
         
-
-        <div id='sliderContent' class="slider">
+        
+        <div class="slider">
+            <div class="sliderMenu">
+                <div class="sliderMenuItem">Info</div>
+                <div class="sliderMenuItem">Liens</div>
+                <div class="sliderMenuItem">Gallerie</div>
+                <div class="sliderMenuItem">Modifer</div>
+                <div class="sliderMenuItem">Supprimer</div>
+                <div class="sliderMenuItem">Fermer</div>
+            </div>
             <div class="row">
-                <div class="col-md-4">
-                    <span class="badge badge-secondary">ID</span>
+                <div class="col-md-3">
+                    <span class="badge badge-secondary slider-id"></span>
                 </div>
-                <div class="col-md-8 text-right">
-                    <button class="closeSlider btn btn-outline-secondary">
-                        <i class="material-icons">close</i>
-                    </button>
-                    <button disabled="disabled" class="nodeEditButton btn btn-outline-secondary"> 
+                <div class="col-md-9 text-right">
+                    
+                    <button disabled="disabled" class="nodeDeleteButton btn btn-outline-secondary btn-sm"> 
                         <i class="material-icons">delete_outline</i> 
                     </button> 
-                    <button class="nodeEditButton btn btn-outline-secondary"> 
+                    <button class="nodeEditButton btn btn-outline-secondary btn-sm"> 
                         <i class="material-icons">edit</i> 
+                    </button>
+                    <button class="closeSlider btn btn-outline-secondary btn-sm">
+                        <i class="material-icons">close</i>
                     </button>
                 </div>
             </div>
@@ -57,13 +69,16 @@
                 <div class="col-md-12">
                     <div id="nodeContent">
                         <h1 class="slider-titre">Titre</h1>
-                        <div class="slider-gallery">
-                            <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
-                            <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
-                            <a href="https://place-hold.it/1100x750" target="_blank"><img src="https://place-hold.it/150x150" /></a>
-                        </div>
                         <div class="slider-chapeau"></div>
                         <p class="slider-contenu"></p>
+                        <hr /> 
+                        <h3>Liens :</h3>
+                        <ul>
+                            <li>XXX <button disabled="disabled" class="btn btn-sm btn-outline-secondary"> <i class="material-icons">delete_outline</i></button> </li>
+                            <li>YYY  <button disabled="disabled" class="btn btn-sm btn-outline-secondary"> <i class="material-icons">delete_outline</i></button> </li>
+                            <li>ZZZ  <button disabled="disabled" class="btn btn-sm btn-outline-secondary"> <i class="material-icons">delete_outline</i></button> </li>
+                        </ul>
+
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -75,11 +90,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="slider-chapeau-form">Description courte :</label>
-                                <textarea rows="3" class="form-control" id="slider-chapeau-form"> </textarea>
+                                <textarea id="mdeEditNodeChapeauArea" rows="3" class="form-control" id="slider-chapeau-form"> </textarea>
                             </div>
                             <div class="form-group">
                                 <label for="slider-contenu-form">Description longue :</label>
-                                <textarea rows="4" class="form-control" id="slider-contenu-form"> </textarea>
+                                <textarea id="mdeEditNodeContenuArea" rows="4" class="form-control" id="slider-contenu-form"> </textarea>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-outline-secondary" id="nodeEditSubmitButton">Ok</button>
@@ -108,14 +123,14 @@
                         <div class="form-group">
                             <label for="#planeteType">Type : </label>
                             <select id="planeteType"  class="form-control">
-                                <option>Personne</option>
-                                <option>Ressource</option>
-                                <option>Événement</option>
+                                <option value="Personne">Personne</option>
+                                <option value="Ressource">Ressource</option>
+                                <option value="Evenement">Evenement</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Titre</label>
-                            <input type="text" class="form-control" />
+                            <input id="titreField" type="text" class="form-control" />
                         </div>
                         <div class="form-group">
                             <label>Date</label>
@@ -127,14 +142,14 @@
                         </div>
                         <div class="form-group">
                             <label>Chapeau</label><br />
-                            <textarea  class="form-control"></textarea>
+                            <textarea id="chapeauArea"  class="form-control"></textarea>
                         </div>
                         <div class="form-group">
                             <label>Contenu</label><br />
-                            <textarea  class="form-control"></textarea>
+                            <textarea id="mdeAddNodeContenuArea"  class="form-control"></textarea>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-outline-secondary">Ajouter</button>
+                            <button id="addNodeFormButton" class="btn btn-outline-secondary">Ajouter</button>
                             <button class="btn btn-outline-secondary">Annuler</button>
                         </div>
                     </form>
@@ -160,20 +175,25 @@
                         <div class="form-group">
                             <label for="#planeteType">Type : </label>
                             <select id="planeteType"  class="form-control">
-                                <option>Participe</option>
+                                <option value="Participe">Participe</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Id planète de départ:</label>
-                            <input type="text" class="form-control" />
+                            <select  id="fromSelect" class="form-control">
+                                <option>Personne: Anna</option>
+                                <option>Ressource: Onzieme</option>
+                                <option>Personne: Poulpe</option>
+                                <option>Personne: Pample</option>
+                            </select>  
                         </div>
 
                         <div class="form-group">
                             <label>Id planète d'arrivée:</label>
-                            <input type="text" class="form-control" />
+                            <input id="to" type="text" class="form-control" />
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-outline-secondary">Ajouter</button>
+                            <button id="addEdgeFormButton" class="btn btn-outline-secondary">Ajouter</button>
                             <button class="btn btn-outline-secondary">Annuler</button>
                         </div>
                     </form>
@@ -188,11 +208,33 @@
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- https://nnattawat.github.io/slideReveal/ -->
-<script src="jquery.slidereveal.min.js"></script>
-
+<script src="js/jquery.slidereveal.min.js"></script>
+<script src="js/sliderinit.js"></script>
 <script type="text/javascript" src="node_modules/vis-network/dist/vis-network.min.js"></script>
 <script src="https://unpkg.com/neo4j-driver"></script>
-<script src="graph.js"></script>
+<script src="node_modules/simplemde/dist/simplemde.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/graph.js"></script>
+<script src="js/service.js"></script>
+<script>
+    // 0./ configure connexion
+    
+    // 1./ Récupérer les données.
+    var intialquery = "MATCH (n)-[r]-(m) OPTIONAL MATCH (p) RETURN n,r,m,p";
+    var nodes = new vis.DataSet([]);
+    var edges = new vis.DataSet([]); 
+    populateDataSets(intialquery);
+    
+    // 2./ créer le graphe
+    var container = document.getElementById('mynetwork');
+    var network = new vis.Network(container, {nodes: nodes,edges: edges}, options);
+    var selectedNode = null; 
+
+
+
+    
+</script>
+<script src="js/ihm.js"></script>
 
 </body>
 </html>

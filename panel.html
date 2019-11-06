@@ -1,0 +1,328 @@
+
+<!doctype html>
+<html lang="fr">
+<head>
+    <title>Adlibitum - Graphe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="node_modules/vis-network/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
+    <link href="graph.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+    <link rel="stylesheet" href="node_modules/simplemde/dist/simplemde.min.css">
+    <style>
+    .nodeEditPanel { 
+        margin-top:20px;
+    }
+    .active {  
+        font-weight: bold;
+        background-color: #efefef;
+    }
+    .panelContent { 
+        background:white;
+        padding: 20px;
+    }
+    .panelMenu {
+
+    }
+    .panelMenuItem { 
+        padding:10px;
+        cursor: pointer;
+        background: white;
+    }
+    .panelMenuItem:hover { 
+        background: #efefef;
+    }
+    
+    .btn {
+        margin-bottom:10px;
+    }
+    
+
+    .panelInfo-chapeau {
+      font-size:20px;
+      line-height: 22px;
+      color:grey;
+      font-weight: bold;
+      margin-bottom: 20px;
+      margin-top:5px;
+  }
+  .panelContent div:first-child {
+    margin-bottom: 20px;
+}
+.panelLink-item { margin-bottom:10px; }
+.panelInfo, .panelLink, .panelImages, .panelEdit { display: none; }
+</style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="nodeEditPanel">
+            <div class="row">
+                <div class="col-md-1 panelMenu">
+                    <!-- info -->
+                    <div class="panelMenuItem menuInfo">
+                        <i class="material-icons">radio_button_unchecked</i>
+                    </div>
+                    <!--Liens-->
+                    <div class="panelMenuItem menuLink">
+                        <i class="material-icons">settings_ethernet</i> 
+                        <span class="badge badge-light numberOfRelation"></span>
+                    </div>
+                    <!-- image -->
+                    <div class="panelMenuItem menuImages">
+                        <i class="material-icons">photo_library</i>
+                    </div>
+                    <!--modifier-->
+                    <div class="panelMenuItem menuEdit">
+                        <i class="material-icons">edit</i>
+                    </div>
+                    <!-- supprimer -->
+                    <div class="panelMenuItem menuDelete">
+                        <i class="material-icons">delete_outline</i>
+                    </div>
+                    <!-- Fermer -->
+                    <div class="panelMenuItem menuClose">
+                        <i class="material-icons">close</i>
+                    </div>
+                </div>
+                <div class="col-md-11 panelContent">
+                    <div>
+                        <span class="panelType badge badge-primary"></span>
+                        <h1 class="panelTitre"></h1>
+                    </div>
+                    <hr />
+                    <div class="panel panelInfo" style="display:block;">
+                        <div class="panelInfo-chapeau">
+                            
+                        </div>
+                        <div class="panelInfo-contenu">
+                           
+
+                       </div>
+                   </div>
+
+                   <div class="panel panelLink">
+                    <h2> Liens</h2>
+                    <div class="panelLink-links">
+                         
+                    </div>
+                     <hr />
+                     <h3> Ajouter un lien vers: </h3>
+                     <div class="panelLink-form">
+                         <div class="form-group row">
+                             <div class="col-md-12">
+                                <label for="">Type:</label>
+                                <select class="form-control form-control-sm">
+                                    <option>Participe</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="">Vers:</label>
+                                <select class="form-control form-control-sm">
+                                    <option>AnnA</option>
+                                    <option>Pample</option>
+                                    <option>Le Onzième</option>
+                                </select>
+                            </div>
+                           
+                            <div class="col-md-4" style="padding-top:25px;">
+                                <button class="btn btn-primary">Ajouter</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="panel panelImages" style="margin-bottom:40px;">
+                        <h2>Images </h2>
+                        <em> Pas d'images pour le moment ...</em>
+                    </div>
+
+                    <div class="panel panelEdit">
+                        <h2> Modifier </h2>
+                        <form>
+                            <div class="form-group">
+                                <label for="slider-titre-form">Titre</label>
+                                <input class="form-control" id="slider-titre-form" type="text" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="#panelEdit-mdeChapeau">Description courte :</label>
+                                <textarea 
+                                id="panelEdit-mdeChapeau" 
+                                rows="3" 
+                                class="form-control" ></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="#panelEdit-mdeContenu">Description longue :</label>
+                                <textarea 
+                                id="panelEdit-mdeContenu" 
+                                rows="4" 
+                                class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-outline-secondary" id="nodeEditSubmitButton">Ok</button>
+                                <button disabled="disabled" class="btn btn-outline-secondary" id="nodeEditSubmitButton">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/Node.js"></script>
+    <script src="https://unpkg.com/neo4j-driver"></script>
+    <!-- https://nnattawat.github.io/slideReveal/ -->
+    <script src="node_modules/simplemde/dist/simplemde.min.js"></script>
+    <script>
+        //init SimpleMarkdownEditor
+        var panelEditMdeChapeau = new SimpleMDE({ element: $("#panelEdit-mdeChapeau")[0] });
+        var panelEditMdeContenu = new SimpleMDE({ element: $("#panelEdit-mdeContenu")[0] });
+        
+        var currentNode;
+
+        //driver & session  
+        var url = "bolt://165.22.206.197";
+        var driver = neo4j.v1.driver(url, neo4j.v1.auth.basic("neo4j", "neo4j"));
+        var session = driver.session();
+
+        function deleteNode(type,titre) {
+
+        }
+
+        function deleteRelation(type, titre) {
+            cypherRequest = `MATCH (:${currentNode.type} {titre: "${currentNode.titre}"})-[r:Participe]-(:${type} {titre: "${titre}"}) DELETE r`;
+            console.log(cypherRequest);
+            session.run(cypherRequest).subscribe({
+                onCompleted: function () { alert("enregistrement supprimé"); },
+                onError: function (error) {  alert("Un problème est survenu");}
+            });
+            initPanel();
+        }
+        
+        function populatePanel() {
+            //populate generic info
+            $(".panelTitre").html(currentNode.titre);
+            $(".panelInfo-chapeau").html(currentNode.chapeau);
+            $(".panelInfo-contenu").html(currentNode.contenu);
+            $(".panelType").html(currentNode.type);
+            $(".numberOfRelation").html(currentNode.relations.length);
+            //clear relations
+            $(".panelLink-links").html(" ");
+            //populate relations
+            currentNode.relations.forEach(function(relation) { 
+                console.log(relation);
+                balise2create = `
+                <div class="panelLink-item">
+                    <span class="badge badge-primary">${relation.type}</span>
+                    ${relation.titre} .......... 
+                    <a class="" href="#">(Voir)</a> 
+                    <a class="deleteAction" onClick="deleteRelation('${relation.type}','${relation.titre}')">
+                        (Supprimer)
+                    </a>
+                </div>`;
+                 $(".panelLink-links").append(balise2create);
+            });
+            //populate edit form
+            $("#slider-titre-form").val(currentNode.titre);
+            panelEditMdeChapeau.value(currentNode.chapeau);
+            panelEditMdeContenu.value(currentNode.contenu);            
+        }
+
+        function initPanel(currentTitre) {
+            //create request
+            cypherRequest = 'MATCH (n {titre:"'+currentTitre+'"}) return n ;';
+            //execute request
+            session.run(cypherRequest).subscribe({
+                onNext: (record) => { 
+                    //on récupère un tableau 
+                    //pour chaque entrée (map)
+                    Object.values(record.toObject()).map(
+                        async (v) => {
+                            if (v instanceof neo4j.v1.types.Node) {
+                                console.log(v);
+                                id = v.identity.toInt();
+                                type = v.labels[0];
+                                titre = v.properties.titre;
+                                chapeau = v.properties.chapeau;
+                                contenu = v.properties.contenu;
+                                console.log(type);
+                                currentNode = new Node(id,type,titre,chapeau,contenu); 
+                            }
+                        }
+                    );
+                },
+                onCompleted: function () { },
+                onError: function (error) { console.log(error);}
+            });
+
+            //get node relation
+            cypherRequestRelation = 'MATCH (n {titre: "'+currentTitre+'"})-[r]-(m) RETURN m';
+            console.log(cypherRequestRelation);
+            session.run(cypherRequestRelation).subscribe({
+                onNext: (record) => { 
+                    //on récupère un tableau 
+                    //pour chaque entrée (map)
+                    Object.values(record.toObject()).map(
+                        async (v) => {
+                            if (v instanceof neo4j.v1.types.Node) {
+                                currentNode.addRelation(v.labels[0], v.properties.titre );
+                            }
+                        }
+                    );
+                },
+                onCompleted: function () { populatePanel(); },
+                onError: function (error) { console.log(error);}
+            });
+            
+
+        }
+
+        //initialisation 
+        currentTitre = "LaMorrigan";
+        initPanel(currentTitre);
+
+        //Gestion Event
+        $(".menuInfo").click(function() {
+            $(".panel").hide();
+            $(".panelMenuItem").removeClass("active");
+            $(".menuInfo").addClass("active");
+            $(".panelInfo").show();
+        });
+        $(".menuLink").click(function() {
+            $(".panel").hide(); 
+            $(".panelMenuItem").removeClass("active");
+            $(".menuLink").addClass("active");
+            $(".panelLink").show();
+        });
+        $(".menuImages").click(function() {
+            $(".panel").hide(); 
+            $(".panelMenuItem").removeClass("active");
+            $(".menuImages").addClass("active");
+            $(".panelImages").show();
+        });
+        $(".menuEdit").click(function() {
+            $(".panel").hide(); 
+            $(".panelMenuItem").removeClass("active");
+            $(".menuEdit").addClass("active");
+            $(".panelEdit").show();
+        });
+        $(".menuDelete").click(function() {
+            if( confirm( "Êtes vous sur de vouloir faire cette supression ? " ) ) {
+                deleteNode(currentNode.type, currentNode.titre);
+            } 
+        }); 
+        $(".menuClose").click(function() {
+            alert("Close Panel");
+        }); 
+
+        
+
+    </script>
+</body>
+</html>

@@ -13,6 +13,7 @@
         color: white;
       }
       .slider {
+        position: relative;
         width: 550px !important;
         overflow: scroll !important;
         background-color: white;
@@ -24,15 +25,14 @@
       #slider h1 { margin-bottom:0;}
       .slider-gallery { display: none;}
       .slider-chapeau {
-          font-size:24px;
-          line-height: 26px;
+          font-size:20px;
+          line-height: 22px;
           color:grey;
           font-weight: bold;
           margin-bottom: 20px;
           margin-top:5px;
       }
       #back2graphButton { margin:10px;}
-      .nodeEditButton { float:right;margin:10px; }
       #nodeEditForm { display: none; }
       #alertMessage { display:none;z-index: 100;}
       .closeAlert { color:blue !important; }
