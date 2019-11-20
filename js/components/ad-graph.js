@@ -75,6 +75,7 @@ Vue.component('ad-graph', {
             selectedNode = this.nodes.get(params.nodes[0]);
             this.$root.$data.visiblePanel = 'edit';
             this.$root.$data.selectedNode = selectedNode;
+            console.log(selectedNode);
         },
     },
 });
