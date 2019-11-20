@@ -29,11 +29,15 @@ Vue.component('ad-add-slider', {
                             </select>
                         </div>
                         <div class="form-group">
+                        <span>Le message multiligne est :</span>
+                            <p style="white-space: pre-line;">{{ message }}</p>
+                            <br>
                             <label for="#panelAdd-mdeChapeau">Description courte :</label>
                             <textarea
-                            id="panelAdd-mdeChapeau"
-                            rows="3"
-                            class="form-control" ></textarea>
+                              id="panelAdd-mdeChapeau"
+                              v-model="shortDesc"
+                              rows="3"
+                              class="form-control" ></textarea>
                         </div>
                         <div class="form-group">
                             <label for="#panelAdd-mdeContenu">Description longue :</label>
@@ -44,19 +48,31 @@ Vue.component('ad-add-slider', {
                         </div>
                         <div class="form-group">
                             <button
+                                v-on:click="submission"
                                 class="btn btn-outline-secondary"
                                 type="submit">Ok</button>
-                            <button disabled="disabled" class="btn btn-outline-secondary">Annuler</button>
+                            <button  v-on:click="hideSlider" class="btn btn-outline-secondary">Annuler</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>`,
-
+    data: function () {
+      return {
+        message: "le chat",
+        shortDesc: "lalala",
+      };
+    },
     methods: {
-        hideSlider: function () {
-            this.$root.$data.visiblePanel = '';
-        }
+      hideSlider: function (event) {
+        if (event) event.preventDefault();
+          this.$root.$data.visiblePanel = '';
+      },
+      submission: function (event) {
+        // `this` fait référence à l'instance de Vue à l'intérieur de `methods`
+        if (event) event.preventDefault();
+        alert('Bonjour maître !'+ this.shortDesc);
+      },
     }
 });
