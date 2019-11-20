@@ -1,7 +1,7 @@
 /* palette https://colorhunt.co/palette/152733 */
 body {
   background-color: #444444;
-  font-family: 'proxima-nova', Helvetica;  
+  font-family: 'proxima-nova', Helvetica;
 }
 
 #mynetwork {
@@ -12,43 +12,34 @@ body {
 #header, #header a {
   color: white;
 }
-.slider {
-  width: 550px !important;
-  overflow: scroll !important;
-  background-color:white;
-  padding: 20px;
-  color:#222;
-  font-size: 16px;
-  line-height: 1.5;
-}
 
-    .nodeEditPanel { 
+    .nodeEditPanel {
         margin-top:20px;
     }
-    .active {  
+    .active {
         font-weight: bold;
         background-color: #efefef;
     }
-    .panelContent { 
+    .panelContent {
         background:white;
         padding: 20px;
     }
     .panelMenu {
 
     }
-    .panelMenuItem { 
+    .panelMenuItem {
         padding:10px;
         cursor: pointer;
         background: white;
     }
-    .panelMenuItem:hover { 
+    .panelMenuItem:hover {
         background: #efefef;
     }
-    
+
     .btn {
         margin-bottom:10px;
     }
-    
+
 
     .panelInfo-chapeau {
       font-size:20px;
@@ -64,33 +55,33 @@ body {
 .panelLink-item { margin-bottom:10px; }
 .panelInfo, .panelLink, .panelImages, .panelEdit { display: none; }
 
-.nodeEditPanel { 
+.nodeEditPanel {
         margin-top:20px;
     }
-    .active {  
+    .active {
         font-weight: bold;
         background-color: #efefef;
     }
-    .panelContent { 
+    .panelContent {
         background:white;
         padding: 20px;
     }
     .panelMenu {
 
     }
-    .panelMenuItem { 
+    .panelMenuItem {
         padding:10px;
         cursor: pointer;
         background: white;
     }
-    .panelMenuItem:hover { 
+    .panelMenuItem:hover {
         background: #efefef;
     }
-    
+
     .btn {
         margin-bottom:10px;
     }
-    
+
 
     .panelInfo-chapeau {
       font-size:20px;

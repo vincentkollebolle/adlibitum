@@ -6,12 +6,32 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- <link href="css/ad-slider.css" rel="stylesheet" type="text/css" /> -->
+
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link href="node_modules/vis-network/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
     <link href="graph.css" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    rel="stylesheet">
-    <link rel="stylesheet" href="node_modules/simplemde/dist/simplemde.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="node_modules/simplemde/dist/simplemde.min.css" />
+
+    <style>
+.slider {
+    background-color: white;
+    color: #222;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow: scroll !important;
+    padding: 20px;
+    position: absolute;
+    right: -550px;
+    top: 0;
+    width: 550px !important;
+}
+
+.slider.visible {
+    right: 0;
+}
+    </style>
 </head>
 <body>
     <div id="ad-app" class="container-fluid">
@@ -20,59 +40,7 @@
         <!--content-->
         <ad-graph></ad-graph>
         <!--slider-->
-        <div id="sliderAdd" class="slider">
-            <div class="nodeAddPanel">
-                <div class="row">
-                    <div class="col-md-1 panelMenu">
-                        <!-- info -->
-                        <div class="panelMenuItem menuInfo">
-                            <i class="material-icons">radio_button_unchecked</i>
-                        </div>
-                        <!-- Fermer -->
-                        <div class="panelMenuItem menuClose triggerAdd">
-                            <i class="material-icons">close</i>
-                        </div>
-                    </div>
-                    <div class="col-md-11 panelContent">
-                        <h1 class="panelTitre">Ajouter un noeud</h1>
-                        <form id="formAddNode">
-                            <div class="form-group">
-                                <label for="slider-titre-form">Titre</label>
-                                <input class="form-control" id="panelAdd-titre" type="text" value="" />
-                            </div>
-                            <div class="form-group">
-                                <label for="panelAdd-type">Type</label>
-                                <select class="form-control" id="panelAdd-type">
-                                    <option value="Ressource">Ressource</option>
-                                    <option value="Personne">Personne</option>
-                                    <option value="Evenement">Événement</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="#panelAdd-mdeChapeau">Description courte :</label>
-                                <textarea
-                                id="panelAdd-mdeChapeau"
-                                rows="3"
-                                class="form-control" ></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="#panelAdd-mdeContenu">Description longue :</label>
-                                <textarea
-                                id="panelAdd-mdeContenu"
-                                rows="4"
-                                class="form-control"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button
-                                    class="btn btn-outline-secondary"
-                                    type="submit">Ok</button>
-                                <button disabled="disabled" class="btn btn-outline-secondary">Annuler</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <ad-add-slider></ad-add-slider>
         <div id="sliderContent" class="slider">
             <div class="nodeEditPanel">
                 <div class="row">
@@ -191,6 +159,7 @@
     <script src="lib/vue.min.js"></script>
 
     <!-- Vue components -->
+    <script src="js/components/ad-add-slider.js"></script>
     <script src="js/components/ad-graph.js"></script>
     <script src="js/components/ad-menu.js"></script>
 

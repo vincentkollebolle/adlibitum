@@ -1,11 +1,11 @@
 //initialize sliderAdd
-var sliderAdd = $('#sliderAdd').slideReveal({
-  trigger: $(".triggerAdd"),
-  position: "right",
-  push: false,
-  overlay: false,
-  autoEscape: false,
-});
+// var sliderAdd = $('#sliderAdd').slideReveal({
+//   trigger: $(".triggerAdd"),
+//   position: "right",
+//   push: false,
+//   overlay: false,
+//   autoEscape: false,
+// });
 
 //initialize sliderContent
 var sliderContent = $('#sliderContent').slideReveal({
