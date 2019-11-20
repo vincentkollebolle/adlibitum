@@ -29,6 +29,7 @@ Vue.component('ad-graph', {
     mounted: function () {
         this.container = document.getElementById('mynetwork');
         this.network = new vis.Network(this.container, { nodes: this.nodes, edges: this.edges }, this.options);
+        this.network.on('selectNode', this.selectNode);
     },
 
     methods: {
@@ -69,6 +70,11 @@ Vue.component('ad-graph', {
                     console.error(error);
                 },
             });
-        }
+        },
+        selectNode: function (params) {
+            selectedNode = this.nodes.get(params.nodes[0]);
+            this.$root.$data.visiblePanel = 'edit';
+            this.$root.$data.selectedNode = selectedNode;
+        },
     },
 });
