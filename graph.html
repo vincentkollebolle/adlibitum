@@ -6,9 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- <link href="css/ad-slider.css" rel="stylesheet" type="text/css" /> -->
-
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link href="node_modules/vis-network/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
     <link href="graph.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -22,7 +20,7 @@
         <!--content-->
         <ad-graph></ad-graph>
         <!--slider-->
-        <ad-add-slider></ad-add-slider>
+        <ad-add-slider v-bind:visible="visiblePanel === 'add'"></ad-add-slider>
         <div id="sliderContent" class="slider">
             <div class="nodeEditPanel">
                 <div class="row">

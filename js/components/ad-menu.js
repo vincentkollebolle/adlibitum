@@ -6,9 +6,15 @@ Vue.component('ad-menu', {
                 <i class="material-icons">home</i>
             </button>
             <!--Ajouter planete-->
-            <button class="triggerAdd btn btn-outline-secondary">
+            <button class="triggerAdd btn btn-outline-secondary" v-on:click="showAddSlider()">
                 <i class="material-icons">add_circle_outline</i>
             </button>
         </div>
     </div>`,
+
+    methods: {
+        showAddSlider: function () {
+            this.$root.$data.visiblePanel = 'add';
+        },
+    }
 });

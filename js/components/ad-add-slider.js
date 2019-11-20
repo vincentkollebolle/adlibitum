@@ -1,4 +1,5 @@
 Vue.component('ad-add-slider', {
+    props: ['visible'],
     template: `<div id="sliderAdd" v-bind:class="{ slider: true, visible: visible }">
         <div class="nodeAddPanel">
             <div class="row">
@@ -8,7 +9,7 @@ Vue.component('ad-add-slider', {
                         <i class="material-icons">radio_button_unchecked</i>
                     </div>
                     <!-- Fermer -->
-                    <div class="panelMenuItem menuClose triggerAdd">
+                    <div class="panelMenuItem menuClose triggerAdd" v-on:click="hideSlider()">
                         <i class="material-icons">close</i>
                     </div>
                 </div>
@@ -53,9 +54,9 @@ Vue.component('ad-add-slider', {
         </div>
     </div>`,
 
-    data: function() {
-        return {
-            visible: false,
-        };
-    },
+    methods: {
+        hideSlider: function () {
+            this.$root.$data.visiblePanel = '';
+        }
+    }
 });
