@@ -6,10 +6,11 @@
     overflow: scroll !important;
     padding: 20px;
     position: absolute;
-    right: 0;
+    right: -550px;
+    top: 0;
     width: 550px !important;
 }
-/*
-.slider .visible {
-    right: -550px;
-} */
+
+.slider.visible {
+    right: 0;
+}
